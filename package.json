@@ -1,0 +1,14 @@
+{
+  "name": "race-layout",
+  "version": "0.0.1",
+  "description": "Layout for a race to be captured by OBS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karan Sekhri",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  }
+}
