@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-slate-200;
+    @apply text-slate-900;
+}
+
+h2 {
+    @apply font-semibold text-xl mb-2;
+}
+
+h3 {
+    @apply font-medium my-1;
+}
+
+.btn {
+    /*dark:bg-sky-500 dark:hover:bg-sky-400*/
+    @apply px-5 py-2 bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold rounded-lg;
+}
+
+input[type="text"] {
+    @apply px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 rounded-md sm:text-sm focus:ring-1;
+}

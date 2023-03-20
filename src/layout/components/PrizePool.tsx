@@ -1,7 +1,23 @@
 import React from 'react'
 import { useRaceContextState } from '../../race-context'
+import { Text } from './Text'
 
 export const PrizePool = () => {
-    const { prizePool } = useRaceContextState()
-    return <div className="absolute">{prizePool.toFixed(2)}</div>
+    const {
+        prizePool,
+        activeLayout: {
+            positions: { prizePool: prizePoolPositions },
+        },
+    } = useRaceContextState()
+
+    if (!prizePool) {
+        return null
+    }
+
+    return (
+        <Text
+            text={`$${prizePool.toFixed(2)}`}
+            positions={prizePoolPositions}
+        />
+    )
 }

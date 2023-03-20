@@ -7,7 +7,7 @@ export const CommentatorsConfig = () => {
 
     return (
         <div>
-            <h1>Commentators</h1>
+            <h2>Commentators</h2>
             <h3>Commentators are: {commentators}</h3>
             <input
                 type="text"
@@ -18,6 +18,7 @@ export const CommentatorsConfig = () => {
                 onChange={(event) => setUpdatedCommentators(event.target.value)}
             />
             <button
+                className="btn"
                 onClick={() => {
                     setCommentators(updatedCommentators)
                 }}

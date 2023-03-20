@@ -14,7 +14,7 @@ export const LayoutConfig = () => {
 
     return (
         <div>
-            <h1>Layout</h1>
+            <h2>Layout</h2>
             <h3>Current Layout is: {selectedLayoutCollection.name}</h3>
             <select
                 name="layout"

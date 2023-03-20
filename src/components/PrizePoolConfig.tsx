@@ -9,7 +9,7 @@ export const PrizePoolConfig = () => {
     const { prizePool, setPrizePool } = useRaceContext()
     return (
         <div>
-            <h1>Prize</h1>
+            <h2>Prize</h2>
             <h3>Current Prize Pool is ${prizePool.toFixed(2)}</h3>
             <h3>Set Prize Pool</h3>
             <input
@@ -27,6 +27,7 @@ export const PrizePoolConfig = () => {
                 }}
             />
             <button
+                className="btn"
                 onClick={() => {
                     setPrizePool(Number(updatePool))
                     setUpdatePool('')
@@ -50,6 +51,7 @@ export const PrizePoolConfig = () => {
                 }}
             />
             <button
+                className="btn"
                 onClick={() => {
                     setPrizePool(prizePool + Number(additionToPool))
                     setAdditionToPool('')

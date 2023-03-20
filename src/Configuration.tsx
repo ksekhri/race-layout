@@ -7,7 +7,7 @@ import { Content } from './components/Content'
 export function Configuration() {
     return (
         <RaceContextProvider>
-            <Header />
+            <Header page="dashboard" />
             <Content />
             <Footer />
         </RaceContextProvider>

@@ -18,6 +18,9 @@ export const Text = ({
             return
         }
         let updatedFontSize = fontSize
+        outerRef.current.style.fontSize = `${
+            containerOffsetSize.width / updatedFontSize
+        }px`
         while (
             (innerRef.current.offsetWidth > outerRef.current.offsetWidth ||
                 innerRef.current.offsetHeight >

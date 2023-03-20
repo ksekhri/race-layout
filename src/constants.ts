@@ -7,7 +7,7 @@ export const DEFAULT_STATE: Omit<
     prizePool: 0,
     commentators: '',
     selectedLayoutCollectionId: '',
-    activeLayoutId: '',
+    activeLayoutId: 'Highlight',
     activeRacers: ['', '', '', '', '', '', ''],
     racers: {},
     highlightedRacerId: '',

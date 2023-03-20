@@ -1,12 +1,13 @@
 import * as Types from './types'
 
-const DEFAULT_TEXT_LAYOUT = {
+const DEFAULT_TEXT_LAYOUT: Types.TextLayout = {
     left: '20%',
     top: '20%',
     fontSize: 20,
     color: '#ffffff',
-    maxWidth: '10%',
+    width: '20%',
     maxHeight: '10%',
+    textAlign: 'left',
 }
 
 export const LAYOUTS: Record<string, Types.LayoutCollection> = {
@@ -18,69 +19,19 @@ export const LAYOUTS: Record<string, Types.LayoutCollection> = {
                 name: 'All Racers',
                 background: 'https://istation64.com/racelayout/assets/4.png',
                 positions: {
-                    prizePool: {
-                        left: '20%',
-                        top: '20%',
-                        fontSize: 20,
-                        color: '#ffffff',
-                    },
-                    commentators: {
-                        left: '20%',
-                        top: '20%',
-                        fontSize: 20,
-                        color: '#ffffff',
-                    },
+                    prizePool: DEFAULT_TEXT_LAYOUT,
+                    commentators: DEFAULT_TEXT_LAYOUT,
                     places: [
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
+                        DEFAULT_TEXT_LAYOUT,
+                        DEFAULT_TEXT_LAYOUT,
+                        DEFAULT_TEXT_LAYOUT,
+                        DEFAULT_TEXT_LAYOUT,
                     ],
                     racers: [
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
-                        {
-                            left: '20%',
-                            top: '20%',
-                            fontSize: 20,
-                            color: '#ffffff',
-                        },
+                        DEFAULT_TEXT_LAYOUT,
+                        DEFAULT_TEXT_LAYOUT,
+                        DEFAULT_TEXT_LAYOUT,
+                        DEFAULT_TEXT_LAYOUT,
                     ],
                     highlight: [],
                 },
@@ -89,14 +40,23 @@ export const LAYOUTS: Record<string, Types.LayoutCollection> = {
                 name: 'Highlight',
                 background: 'https://istation64.com/racelayout/assets/4h.png',
                 positions: {
-                    prizePool: DEFAULT_TEXT_LAYOUT,
+                    prizePool: {
+                        left: '1.85%',
+                        top: '14.9%',
+                        fontSize: 30,
+                        color: '#ffffff',
+                        width: '18.6%',
+                        maxHeight: '9.5%',
+                        textAlign: 'center',
+                    },
                     commentators: {
-                        left: '3.2%',
+                        left: '1.85%',
                         top: '29.8%',
                         fontSize: 30,
                         color: '#ffffff',
-                        maxWidth: '18.6%',
+                        width: '18.6%',
                         maxHeight: '39.6%',
+                        textAlign: 'center',
                     },
                     places: [
                         DEFAULT_TEXT_LAYOUT,

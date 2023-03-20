@@ -27,6 +27,7 @@ export const RemoveRacer = ({}: {}) => {
             </select>
             {racerId && (
                 <button
+                    className="btn"
                     onClick={() => {
                         if (
                             window.confirm(

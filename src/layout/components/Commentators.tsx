@@ -10,5 +10,9 @@ export const Commentators = () => {
         },
     } = useRaceContextState()
 
+    if (!commentators) {
+        return null
+    }
+
     return <Text text={commentators} positions={commentatorPositions} />
 }

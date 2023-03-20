@@ -24,7 +24,7 @@ export const ActiveRacer = ({
     const dirty = time !== activeRacer.time || pb !== activeRacer.pb
 
     return (
-        <div>
+        <div className="flex">
             <Highlighter racerId={activeRacer.name} />
             <select
                 name="racer"
@@ -54,6 +54,7 @@ export const ActiveRacer = ({
             />
             {dirty && (
                 <button
+                    className="btn"
                     onClick={() => {
                         updateRacer({ name: activeRacer.name, time, pb })
                     }}

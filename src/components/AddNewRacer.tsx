@@ -22,6 +22,8 @@ export const AddNewRacer = () => {
                 onChange={(event) => setPb(event.target.value)}
             />
             <button
+                disabled
+                className="btn"
                 onClick={() => {
                     addRacer({ name, pb, time: '' })
                     setName('')

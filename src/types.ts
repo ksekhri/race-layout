@@ -41,8 +41,9 @@ export type TextLayout = {
     top: string
     fontSize: number
     color: string
-    maxWidth: string
+    width: string
     maxHeight: string
+    textAlign: 'left' | 'center' | 'right'
 }
 
 export type OffsetSize = { width: number; height: number }

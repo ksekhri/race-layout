@@ -10,7 +10,7 @@ export const RacerConfig = () => {
 
     return (
         <div>
-            <h1>Racers</h1>
+            <h2>Racers</h2>
             <h3>
                 Active Racers Are:{' '}
                 {activeRacers

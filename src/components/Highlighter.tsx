@@ -8,19 +8,21 @@ export const Highlighter = ({ racerId }: { racerId: string }) => {
 
     const isHighlighed = racerId !== '' && highlightedRacerId === racerId
 
+    const onClick = () => {
+        if (isHighlighed) {
+            setHighlightedRacer('')
+        } else {
+            racerId && setHighlightedRacer(racerId)
+        }
+    }
+
     return (
-        <div>
+        <button onClick={onClick}>
             {isHighlighed ? (
-                <SparkleFilled
-                    onClick={() => setHighlightedRacer('')}
-                    width={20}
-                />
+                <SparkleFilled width={20} />
             ) : (
-                <Sparkle
-                    onClick={() => racerId && setHighlightedRacer(racerId)}
-                    width={20}
-                />
+                <Sparkle width={20} />
             )}
-        </div>
+        </button>
     )
 }
