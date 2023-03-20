@@ -1,0 +1,46 @@
+import React from 'react'
+import * as Types from '../../types'
+import { useLayoutContext } from '../layout-context'
+
+export const Text = ({
+    text,
+    positions: { fontSize, ...positions },
+}: {
+    positions: Types.TextLayout
+    text: string
+}) => {
+    const { containerOffsetSize } = useLayoutContext()
+    const outerRef = React.useRef<HTMLDivElement | null>(null)
+    const innerRef = React.useRef<HTMLElement | null>(null)
+
+    React.useEffect(() => {
+        if (!outerRef.current || !innerRef.current) {
+            return
+        }
+        let updatedFontSize = fontSize
+        while (
+            (innerRef.current.offsetWidth > outerRef.current.offsetWidth ||
+                innerRef.current.offsetHeight >
+                    outerRef.current.offsetHeight) &&
+            fontSize > 0
+        ) {
+            updatedFontSize = updatedFontSize + 1
+            outerRef.current.style.fontSize = `${
+                containerOffsetSize.width / updatedFontSize
+            }px`
+        }
+    }, [text, containerOffsetSize])
+
+    return (
+        <div
+            className="absolute"
+            style={{
+                ...positions,
+                fontSize: `${containerOffsetSize.width / fontSize}px`,
+            }}
+            ref={outerRef}
+        >
+            <span ref={innerRef}>{text}</span>
+        </div>
+    )
+}

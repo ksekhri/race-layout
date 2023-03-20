@@ -1,11 +1,12 @@
 import React from 'react'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 import { AddNewRacer } from './AddNewRacer'
 import { ActiveRacer } from './ActiveRacer'
 import { RemoveRacer } from './RemoveRacer'
 
 export const RacerConfig = () => {
-    const { activeRacers, getRacer, layoutData } = useRaceContext()
+    const { activeRacers, getRacer, selectedLayoutCollection } =
+        useRaceContext()
 
     return (
         <div>
@@ -14,12 +15,12 @@ export const RacerConfig = () => {
                 Active Racers Are:{' '}
                 {activeRacers
                     .map((racerId) => getRacer(racerId).name)
-                    .slice(0, layoutData.racers)
+                    .slice(0, selectedLayoutCollection.racers)
                     .join(', ')}
             </h3>
             <h3>Update Racers</h3>
             {activeRacers
-                .slice(0, layoutData.racers)
+                .slice(0, selectedLayoutCollection.racers)
                 .map((activeRacer, index) => (
                     <ActiveRacer
                         key={`${index}${activeRacer}`}

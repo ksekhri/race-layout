@@ -1,20 +1,25 @@
 import React from 'react'
 import map from 'lodash/map'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 import { LAYOUTS } from '../layouts'
 import { Layout } from './Layout'
 
 export const LayoutConfig = () => {
-    const { layout, activeLayout, setLayout, layoutData } = useRaceContext()
+    const {
+        selectedLayoutCollectionId,
+        activeLayoutId,
+        setLayout,
+        selectedLayoutCollection,
+    } = useRaceContext()
 
     return (
         <div>
             <h1>Layout</h1>
-            <h3>Current Layout is: {layoutData.name}</h3>
+            <h3>Current Layout is: {selectedLayoutCollection.name}</h3>
             <select
                 name="layout"
                 id="layout"
-                value={layout}
+                value={selectedLayoutCollectionId}
                 onChange={(event) => {
                     setLayout(event.target.value)
                 }}
@@ -25,12 +30,12 @@ export const LayoutConfig = () => {
                     </option>
                 ))}
             </select>
-            {map(layoutData.layouts, (layoutItem) => (
+            {map(selectedLayoutCollection.layouts, (layoutItem) => (
                 <Layout
                     key={layoutItem.name}
                     layout={layoutItem}
-                    activeLayout={activeLayout}
-                    parentName={layoutData.name}
+                    activeLayoutId={activeLayoutId}
+                    parentName={selectedLayoutCollection.name}
                 />
             ))}
         </div>

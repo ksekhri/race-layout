@@ -2,12 +2,12 @@ import * as Types from './types'
 
 export const DEFAULT_STATE: Omit<
     Types.State,
-    'layoutData' | 'getRacer' | 'getLayout'
+    'selectedLayoutCollection' | 'getRacer' | 'getLayout' | 'activeLayout'
 > = {
     prizePool: 0,
     commentators: '',
-    layout: '',
-    activeLayout: '',
+    selectedLayoutCollectionId: '',
+    activeLayoutId: '',
     activeRacers: ['', '', '', '', '', '', ''],
     racers: {},
     highlightedRacerId: '',

@@ -9,8 +9,10 @@ const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 type Updater = {
     setPrizePool: (prizePool: Types.State['prizePool']) => void
     setCommentators: (commentators: Types.State['commentators']) => void
-    setLayout: (layout: Types.State['layout']) => void
-    setActiveLayout: (activeLayout: Types.State['activeLayout']) => void
+    setLayout: (
+        selectedLayoutCollectionId: Types.State['selectedLayoutCollectionId']
+    ) => void
+    setActiveLayoutId: (activeLayoutId: Types.State['activeLayoutId']) => void
     setActiveRacer: (racerId: string, index: number) => void
     setHighlightedRacer: (racerId: Types.State['highlightedRacerId']) => void
     addRacer: (racer: Types.Racer) => void
@@ -84,12 +86,20 @@ export const RaceContextProvider = ({
         setData({ ...data, commentators })
     }
 
-    const setLayout = (layout: Types.State['layout']) => {
-        setData({ ...data, layout, activeLayout: '' })
+    const setLayout = (
+        selectedLayoutCollectionId: Types.State['selectedLayoutCollectionId']
+    ) => {
+        setData({
+            ...data,
+            selectedLayoutCollectionId,
+            activeLayoutId: '',
+        })
     }
 
-    const setActiveLayout = (activeLayout: Types.State['activeLayout']) => {
-        setData({ ...data, activeLayout })
+    const setActiveLayoutId = (
+        activeLayoutId: Types.State['activeLayoutId']
+    ) => {
+        setData({ ...data, activeLayoutId })
     }
 
     const setRacers = (racers: Types.State['racers']) => {
@@ -120,8 +130,8 @@ export const RaceContextProvider = ({
     }
 
     const getLayout = (layoutId: string) => {
-        if (data.layoutData.layouts[layoutId]) {
-            return data.layoutData.layouts[layoutId]
+        if (data.selectedLayoutCollection.layouts[layoutId]) {
+            return data.selectedLayoutCollection.layouts[layoutId]
         }
         return {
             name: '',
@@ -165,16 +175,23 @@ export const RaceContextProvider = ({
             ? collectionArray[0]
             : { name: '', racers: 0, layouts: {} }
     }
-    const layoutData =
-        data.layout !== ''
-            ? LAYOUTS[data.layout]
+    const selectedLayoutCollection =
+        data.selectedLayoutCollectionId !== ''
+            ? LAYOUTS[data.selectedLayoutCollectionId]
             : getFirstLayoutCollectionIfExists()
     const getFirstLayoutIfExists = () => {
-        const layoutArray = map(layoutData.layouts, (item) => item)
+        const layoutArray = map(
+            selectedLayoutCollection.layouts,
+            (item) => item
+        )
         return layoutArray.length > 0 ? layoutArray[0].name : ''
     }
-    const activeLayout =
-        data.activeLayout !== '' ? data.activeLayout : getFirstLayoutIfExists()
+    const activeLayoutId =
+        data.activeLayoutId !== ''
+            ? data.activeLayoutId
+            : getFirstLayoutIfExists()
+
+    const selectedLayoutCollectionId = selectedLayoutCollection.name
 
     const getFirstRacerIdIfExists = () => {
         return data.activeRacers.length > 0 ? data.activeRacers[0] : ''
@@ -184,13 +201,29 @@ export const RaceContextProvider = ({
             ? data.highlightedRacerId
             : getFirstRacerIdIfExists()
 
+    const activeLayout =
+        activeLayoutId !== ''
+            ? LAYOUTS[selectedLayoutCollectionId].layouts[activeLayoutId]
+            : {
+                  name: 'No Layouts',
+                  background: 'no-layout.png',
+                  positions: {
+                      prizePool: { x: 0.5, y: 0.5, size: 0.5 },
+                      commentators: { x: 0.5, y: 0.5, size: 0.5 },
+                      places: [{ x: 0.5, y: 0.5, size: 0.5 }],
+                      racers: [{ x: 0.5, y: 0.5, size: 0.5 }],
+                      highlight: [],
+                  },
+              }
+
     return (
         <RaceContextState.Provider
             value={{
                 ...data,
                 getRacer,
-                layoutData,
+                selectedLayoutCollection,
                 getLayout,
+                activeLayoutId,
                 activeLayout,
                 highlightedRacerId,
             }}
@@ -200,7 +233,7 @@ export const RaceContextProvider = ({
                     setPrizePool,
                     setCommentators,
                     setLayout,
-                    setActiveLayout,
+                    setActiveLayoutId,
                     setActiveRacer,
                     setHighlightedRacer,
                     addRacer,

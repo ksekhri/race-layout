@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 
 export const CommentatorsConfig = () => {
     const { commentators, setCommentators } = useRaceContext()

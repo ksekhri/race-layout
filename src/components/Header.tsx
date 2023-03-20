@@ -5,8 +5,8 @@ export const Header = () => (
     <header>
         <div>👟 RaceLayout</div>
         <div>Dashboard</div>
-        <div>
+        <a href="/layout" target="_blank" rel="noopener">
             Open Layout <ArrowTopRightOnSquareIcon width={18} />
-        </div>
+        </a>
     </header>
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 import map from 'lodash/map'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 import { Highlighter } from './Highlighter'
 
 export const ActiveRacer = ({

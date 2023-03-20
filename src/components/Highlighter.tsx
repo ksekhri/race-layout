@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 import { SparklesIcon as Sparkle } from '@heroicons/react/24/outline'
 import { SparklesIcon as SparkleFilled } from '@heroicons/react/24/solid'
 

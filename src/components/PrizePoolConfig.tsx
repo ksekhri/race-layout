@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 
 const floatValidator = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/
 

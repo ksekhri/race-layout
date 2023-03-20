@@ -1,7 +1,10 @@
 import React from 'react'
-import { useRaceContextState } from '../../context'
+import { useRaceContextState } from '../../race-context'
 
 export const Background = () => {
-    const { layout } = useRaceContextState()
-    return <div>{layout}</div>
+    const { activeLayout } = useRaceContextState()
+
+    return (
+        <img className="w-full h-auto" src={activeLayout.background} alt="" />
+    )
 }

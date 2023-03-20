@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRaceContextUpdater } from '../context'
+import { useRaceContextUpdater } from '../race-context'
 
 export const AddNewRacer = () => {
     const { addRacer } = useRaceContextUpdater()

@@ -1,6 +1,6 @@
 import React from 'react'
 import filter from 'lodash/filter'
-import { useRaceContextState } from '../../context'
+import { useRaceContextState } from '../../race-context'
 
 export const Racers = () => {
     const { racers, highlightedRacerId } = useRaceContextState()
@@ -11,14 +11,12 @@ export const Racers = () => {
     )
 
     return (
-        <div>
+        <div className="absolute">
             {nonHighlightedRacers.map(({ name, pb }) => (
-                <>
-                    <div>
-                        {name}
-                        {pb}
-                    </div>
-                </>
+                <div key={name}>
+                    {name}
+                    {pb}
+                </div>
             ))}
         </div>
     )

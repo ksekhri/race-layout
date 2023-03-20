@@ -1,9 +1,10 @@
 export type State = {
     prizePool: number
     commentators: string
-    layout: string
-    layoutData: LayoutCollection
-    activeLayout: string
+    selectedLayoutCollectionId: string
+    selectedLayoutCollection: LayoutCollection
+    activeLayoutId: string
+    activeLayout: Layout
     getLayout: (layoutId: string) => Layout
     activeRacers: string[]
     racers: Record<string, Racer>
@@ -36,7 +37,12 @@ export type Layout = {
 }
 
 export type TextLayout = {
-    x: number
-    y: number
-    size: number
+    left: string
+    top: string
+    fontSize: number
+    color: string
+    maxWidth: string
+    maxHeight: string
 }
+
+export type OffsetSize = { width: number; height: number }

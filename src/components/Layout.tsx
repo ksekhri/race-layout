@@ -1,17 +1,17 @@
 import React from 'react'
-import { useRaceContext } from '../context'
+import { useRaceContext } from '../race-context'
 import * as Types from '../types'
 
 export const Layout = ({
     layout,
-    activeLayout,
+    activeLayoutId,
     parentName,
 }: {
     layout: Types.Layout
-    activeLayout: string
+    activeLayoutId: string
     parentName: string
 }) => {
-    const { setActiveLayout } = useRaceContext()
+    const { setActiveLayoutId } = useRaceContext()
 
     const id = `layoutradio-${layout.name}`
 
@@ -22,10 +22,10 @@ export const Layout = ({
                 id={id}
                 value={layout.name}
                 name={parentName}
-                checked={activeLayout === layout.name}
+                checked={activeLayoutId === layout.name}
                 onChange={(event) => {
                     if (event.target.checked) {
-                        setActiveLayout(layout.name)
+                        setActiveLayoutId(layout.name)
                     }
                 }}
             />
