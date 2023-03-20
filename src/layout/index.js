@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
-import { Configuration } from "./Configuration";
+import { Layout } from "./Layout";
 
 const container = document.getElementById("app");
 const root = createRoot(container)
-root.render(<Configuration />);
+root.render(<Layout />);
