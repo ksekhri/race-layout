@@ -1,43 +1,13 @@
 import React from 'react'
-import map from 'lodash/map'
-import { useRaceContext } from '../race-context'
-import { LAYOUTS } from '../layouts'
-import { Layout } from './Layout'
+import { LayoutCollectionSelector } from './LayoutCollectionSelector'
+import { LayoutItemRadio } from './LayoutItemRadio'
 
 export const LayoutConfig = () => {
-    const {
-        selectedLayoutCollectionId,
-        activeLayoutId,
-        setLayout,
-        selectedLayoutCollection,
-    } = useRaceContext()
-
     return (
         <div>
-            <h2>Layout</h2>
-            <h3>Current Layout is: {selectedLayoutCollection.name}</h3>
-            <select
-                name="layout"
-                id="layout"
-                value={selectedLayoutCollectionId}
-                onChange={(event) => {
-                    setLayout(event.target.value)
-                }}
-            >
-                {map(LAYOUTS, ({ name }, id) => (
-                    <option key={id} value={id}>
-                        {name}
-                    </option>
-                ))}
-            </select>
-            {map(selectedLayoutCollection.layouts, (layoutItem) => (
-                <Layout
-                    key={layoutItem.name}
-                    layout={layoutItem}
-                    activeLayoutId={activeLayoutId}
-                    parentName={selectedLayoutCollection.name}
-                />
-            ))}
+            <h2>Layout Collection</h2>
+            <LayoutCollectionSelector />
+            <LayoutItemRadio />
         </div>
     )
 }

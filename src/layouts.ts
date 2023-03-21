@@ -6,7 +6,7 @@ const DEFAULT_TEXT_LAYOUT: Types.TextLayout = {
     fontSize: 20,
     color: '#ffffff',
     width: '20%',
-    maxHeight: '10%',
+    height: '10%',
     textAlign: 'left',
 }
 
@@ -46,7 +46,7 @@ export const LAYOUTS: Record<string, Types.LayoutCollection> = {
                         fontSize: 30,
                         color: '#ffffff',
                         width: '18.6%',
-                        maxHeight: '9.5%',
+                        height: '9.5%',
                         textAlign: 'center',
                     },
                     commentators: {
@@ -55,7 +55,7 @@ export const LAYOUTS: Record<string, Types.LayoutCollection> = {
                         fontSize: 30,
                         color: '#ffffff',
                         width: '18.6%',
-                        maxHeight: '39.6%',
+                        height: '39.6%',
                         textAlign: 'center',
                     },
                     places: [
@@ -65,6 +65,7 @@ export const LAYOUTS: Record<string, Types.LayoutCollection> = {
                         DEFAULT_TEXT_LAYOUT,
                     ],
                     racers: [
+                        DEFAULT_TEXT_LAYOUT,
                         DEFAULT_TEXT_LAYOUT,
                         DEFAULT_TEXT_LAYOUT,
                         DEFAULT_TEXT_LAYOUT,

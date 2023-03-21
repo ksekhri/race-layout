@@ -11,12 +11,12 @@ export const Header = ({ page }: { page: 'dashboard' | 'layout-editor' }) => (
                 <a href="/" className="py-2 px-6">
                     <div>Dashboard</div>
                 </a>
-                <a href="/" className="py-2 px-6">
+                <a href="/layout-editor/" className="py-2 px-6">
                     <div>Layout Editor</div>
                 </a>
                 <a
                     className="flex py-2 px-6"
-                    href="/layout"
+                    href="/layout/"
                     target="_blank"
                     rel="noopener"
                 >

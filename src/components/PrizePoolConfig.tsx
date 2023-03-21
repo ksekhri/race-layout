@@ -1,7 +1,6 @@
 import React from 'react'
 import { useRaceContext } from '../race-context'
-
-const floatValidator = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/
+import { FloatInput } from './FloatInput'
 
 export const PrizePoolConfig = () => {
     const [additionToPool, setAdditionToPool] = React.useState('')
@@ -12,22 +11,17 @@ export const PrizePoolConfig = () => {
             <h2>Prize</h2>
             <h3>Current Prize Pool is ${prizePool.toFixed(2)}</h3>
             <h3>Set Prize Pool</h3>
-            <input
-                type="text"
+            <FloatInput
                 name="prize-pool"
                 placeholder="Prize Pool"
-                id=""
                 value={updatePool}
                 onChange={(event) => {
-                    const newVal =
-                        event.target.value === '.' ? '0.' : event.target.value
-                    if (newVal === '' || floatValidator.test(newVal)) {
-                        setUpdatePool(newVal)
-                    }
+                    setUpdatePool(event.target.value)
                 }}
             />
             <button
                 className="btn"
+                disabled={isNaN(Number(updatePool))}
                 onClick={() => {
                     setPrizePool(Number(updatePool))
                     setUpdatePool('')
@@ -36,22 +30,17 @@ export const PrizePoolConfig = () => {
                 Set Amount
             </button>
             <h3>Add to prize pool</h3>
-            <input
-                type="text"
+            <FloatInput
                 name="prize-pool"
                 placeholder="Prize Pool"
-                id=""
                 value={additionToPool}
                 onChange={(event) => {
-                    const newVal =
-                        event.target.value === '.' ? '0.' : event.target.value
-                    if (newVal === '' || floatValidator.test(newVal)) {
-                        setAdditionToPool(newVal)
-                    }
+                    setAdditionToPool(event.target.value)
                 }}
             />
             <button
                 className="btn"
+                disabled={isNaN(Number(additionToPool))}
                 onClick={() => {
                     setPrizePool(prizePool + Number(additionToPool))
                     setAdditionToPool('')

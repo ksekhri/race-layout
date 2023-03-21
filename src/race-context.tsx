@@ -9,7 +9,7 @@ const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 type Updater = {
     setPrizePool: (prizePool: Types.State['prizePool']) => void
     setCommentators: (commentators: Types.State['commentators']) => void
-    setLayout: (
+    setLayoutCollectionId: (
         selectedLayoutCollectionId: Types.State['selectedLayoutCollectionId']
     ) => void
     setActiveLayoutId: (activeLayoutId: Types.State['activeLayoutId']) => void
@@ -86,7 +86,7 @@ export const RaceContextProvider = ({
         setData({ ...data, commentators })
     }
 
-    const setLayout = (
+    const setLayoutCollectionId = (
         selectedLayoutCollectionId: Types.State['selectedLayoutCollectionId']
     ) => {
         setData({
@@ -232,7 +232,7 @@ export const RaceContextProvider = ({
                 value={{
                     setPrizePool,
                     setCommentators,
-                    setLayout,
+                    setLayoutCollectionId,
                     setActiveLayoutId,
                     setActiveRacer,
                     setHighlightedRacer,

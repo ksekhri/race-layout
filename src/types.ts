@@ -42,7 +42,7 @@ export type TextLayout = {
     fontSize: number
     color: string
     width: string
-    maxHeight: string
+    height: string
     textAlign: 'left' | 'center' | 'right'
 }
 
