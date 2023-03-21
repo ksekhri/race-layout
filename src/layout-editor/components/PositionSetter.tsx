@@ -21,6 +21,16 @@ export const PositionSetter = ({
     const [height, setHeight] = React.useState(value.height)
     const [width, setWidth] = React.useState(value.width)
 
+    React.useEffect(() => {
+        setColor(value.color)
+        setFontSize(String(value.fontSize))
+        setTextAlign(value.textAlign)
+        setLeft(value.left)
+        setTop(value.top)
+        setHeight(value.height)
+        setWidth(value.width)
+    }, [value])
+
     const disabled =
         !!color &&
         color === value.color &&
@@ -129,7 +139,7 @@ export const PositionSetter = ({
                         })
                     }
                 >
-                    Update Positions
+                    Update Position
                 </button>
                 <button className="btn-secondary ml-6" onClick={() => cancel()}>
                     Cancel

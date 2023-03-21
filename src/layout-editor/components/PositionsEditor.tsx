@@ -59,14 +59,12 @@ export const PositionsEditor = () => {
                     ))}
                 </select>
                 {positionNumber !== '' && (
-                    <>
-                        <PositionSetter
-                            name={selectedItem.name}
-                            value={selectedItem.value}
-                            setter={selectedItem.setter}
-                            cancel={() => setPositionNumber('')}
-                        />
-                    </>
+                    <PositionSetter
+                        name={selectedItem.name}
+                        value={selectedItem.value}
+                        setter={selectedItem.setter}
+                        cancel={() => setPositionNumber('')}
+                    />
                 )}
             </Card>
             <Card className="max-w-3xl">
