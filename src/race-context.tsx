@@ -1,8 +1,8 @@
 import * as React from 'react'
 import map from 'lodash/map'
 import * as Types from './types'
+import { DEFAULT_TEXT_LAYOUT } from './constants'
 import { DEFAULT_STATE } from './constants'
-import { LAYOUTS } from './layouts'
 
 const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 
@@ -19,6 +19,26 @@ type Updater = {
     updateRacer: (racer: Types.Racer) => void
     removeRacer: (racerId: string) => void
     setRacers: (racers: Types.State['racers']) => void
+    updateLayout: (data: {
+        layout: Types.Layout
+        layoutId: string
+        layoutCollectionId: string
+    }) => void
+    updatePosition: (
+        data: {
+            layoutId?: string
+            layoutCollectionId?: string
+        } & (
+            | {
+                  position: Types.TextLayout
+                  positionKey: 'prizePool' | 'commentators'
+              }
+            | {
+                  position: Types.TextLayout[]
+                  positionKey: 'places' | 'racers' | 'highlight'
+              }
+        )
+    ) => void
 }
 
 const RaceContextState = React.createContext<Types.State | null>(null)
@@ -58,7 +78,9 @@ export const RaceContextProvider = ({
 }) => {
     const [data, setData] = React.useState<Types.State>(() => {
         const savedData = localStorage.getItem(LOCAL_STORAGE_DATA_KEY)
-        return savedData ? JSON.parse(savedData) : DEFAULT_STATE
+        return savedData
+            ? { ...DEFAULT_STATE, ...JSON.parse(savedData) }
+            : DEFAULT_STATE
     })
 
     React.useEffect(() => {
@@ -137,16 +159,8 @@ export const RaceContextProvider = ({
             name: '',
             background: '',
             positions: {
-                prizePool: {
-                    x: 0,
-                    y: 0,
-                    size: 0,
-                },
-                commentators: {
-                    x: 0,
-                    y: 0,
-                    size: 0,
-                },
+                prizePool: DEFAULT_TEXT_LAYOUT,
+                commentators: DEFAULT_TEXT_LAYOUT,
                 places: [],
                 racers: [],
                 highlight: [],
@@ -170,14 +184,14 @@ export const RaceContextProvider = ({
     }
 
     const getFirstLayoutCollectionIfExists = () => {
-        const collectionArray = map(LAYOUTS, (item) => item)
+        const collectionArray = map(data.layoutLibrary, (item) => item)
         return collectionArray.length > 0
             ? collectionArray[0]
             : { name: '', racers: 0, layouts: {} }
     }
     const selectedLayoutCollection =
         data.selectedLayoutCollectionId !== ''
-            ? LAYOUTS[data.selectedLayoutCollectionId]
+            ? data.layoutLibrary[data.selectedLayoutCollectionId]
             : getFirstLayoutCollectionIfExists()
     const getFirstLayoutIfExists = () => {
         const layoutArray = map(
@@ -203,18 +217,85 @@ export const RaceContextProvider = ({
 
     const activeLayout =
         activeLayoutId !== ''
-            ? LAYOUTS[selectedLayoutCollectionId].layouts[activeLayoutId]
+            ? data.layoutLibrary[selectedLayoutCollectionId].layouts[
+                  activeLayoutId
+              ]
             : {
-                  name: 'No Layouts',
-                  background: 'no-layout.png',
+                  name: '',
+                  background: '',
                   positions: {
-                      prizePool: { x: 0.5, y: 0.5, size: 0.5 },
-                      commentators: { x: 0.5, y: 0.5, size: 0.5 },
-                      places: [{ x: 0.5, y: 0.5, size: 0.5 }],
-                      racers: [{ x: 0.5, y: 0.5, size: 0.5 }],
+                      prizePool: DEFAULT_TEXT_LAYOUT,
+                      commentators: DEFAULT_TEXT_LAYOUT,
+                      places: [],
+                      racers: [],
                       highlight: [],
                   },
               }
+    const updateLayout = ({
+        layout,
+        layoutCollectionId,
+        layoutId,
+    }: {
+        layout: Types.Layout
+        layoutId: string
+        layoutCollectionId: string
+    }) => {
+        setData({
+            ...data,
+            layoutLibrary: {
+                ...data.layoutLibrary,
+                [layoutCollectionId]: {
+                    ...data.layoutLibrary[layoutCollectionId],
+                    layouts: {
+                        ...data.layoutLibrary[layoutCollectionId].layouts,
+                        [layoutId]: layout,
+                    },
+                },
+            },
+        })
+    }
+
+    const updatePosition = ({
+        position,
+        layoutCollectionId = data.selectedLayoutCollectionId,
+        layoutId = data.activeLayoutId,
+        positionKey,
+    }: {
+        layoutId?: string
+        layoutCollectionId?: string
+    } & (
+        | {
+              position: Types.TextLayout
+              positionKey: 'prizePool' | 'commentators'
+          }
+        | {
+              position: Types.TextLayout[]
+              positionKey: 'places' | 'racers' | 'highlight'
+          }
+    )) => {
+        setData({
+            ...data,
+            layoutLibrary: {
+                ...data.layoutLibrary,
+                [layoutCollectionId]: {
+                    ...data.layoutLibrary[layoutCollectionId],
+                    layouts: {
+                        ...data.layoutLibrary[layoutCollectionId].layouts,
+                        [layoutId]: {
+                            ...data.layoutLibrary[layoutCollectionId].layouts[
+                                layoutId
+                            ],
+                            positions: {
+                                ...data.layoutLibrary[layoutCollectionId]
+                                    .layouts[layoutId].positions,
+                                [positionKey]: position,
+                            },
+                        },
+                    },
+                },
+            },
+        })
+    }
 
     return (
         <RaceContextState.Provider
@@ -240,6 +321,8 @@ export const RaceContextProvider = ({
                     setRacers,
                     updateRacer,
                     removeRacer,
+                    updateLayout,
+                    updatePosition,
                 }}
             >
                 {children}

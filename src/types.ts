@@ -1,6 +1,7 @@
 export type State = {
     prizePool: number
     commentators: string
+    layoutLibrary: LayoutLibrary
     selectedLayoutCollectionId: string
     selectedLayoutCollection: LayoutCollection
     activeLayoutId: string
@@ -11,6 +12,8 @@ export type State = {
     getRacer: (racerId: string) => Racer
     highlightedRacerId: string
 }
+
+type LayoutLibrary = Record<string, LayoutCollection>
 
 export type Racer = {
     name: string
@@ -27,13 +30,15 @@ export type LayoutCollection = {
 export type Layout = {
     name: string
     background: string
-    positions: {
-        prizePool: TextLayout
-        commentators: TextLayout
-        places: TextLayout[]
-        racers: TextLayout[]
-        highlight: TextLayout[]
-    }
+    positions: Positions
+}
+
+export type Positions = {
+    prizePool: TextLayout
+    commentators: TextLayout
+    places: TextLayout[]
+    racers: TextLayout[]
+    highlight: TextLayout[]
 }
 
 export type TextLayout = {

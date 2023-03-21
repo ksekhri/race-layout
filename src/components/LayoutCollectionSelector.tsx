@@ -1,10 +1,10 @@
 import React from 'react'
 import map from 'lodash/map'
 import { useRaceContext } from '../race-context'
-import { LAYOUTS } from '../layouts'
 
 export const LayoutCollectionSelector = () => {
     const {
+        layoutLibrary,
         selectedLayoutCollectionId,
         setLayoutCollectionId,
         selectedLayoutCollection,
@@ -21,7 +21,7 @@ export const LayoutCollectionSelector = () => {
                     setLayoutCollectionId(event.target.value)
                 }}
             >
-                {map(LAYOUTS, ({ name }, id) => (
+                {map(layoutLibrary, ({ name }, id) => (
                     <option key={id} value={id}>
                         {name}
                     </option>

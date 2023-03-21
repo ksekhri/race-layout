@@ -10,7 +10,7 @@ export const PositionSetter = ({
 }: {
     name: string
     value: Types.TextLayout
-    setter: (layout: Partial<Types.TextLayout>) => void
+    setter: (layout: Types.TextLayout) => void
     cancel: () => void
 }) => {
     const [color, setColor] = React.useState(value.color)
@@ -86,8 +86,8 @@ export const PositionSetter = ({
                             }
                         }}
                     >
-                        <option value="left">Left</option>
                         <option value="center">Center</option>
+                        <option value="left">Left</option>
                     </select>
                 </div>
                 <div className="mt-2">
@@ -127,7 +127,7 @@ export const PositionSetter = ({
                 <button
                     className="btn"
                     disabled={disabled}
-                    onClick={() =>
+                    onClick={() => {
                         setter({
                             color,
                             fontSize: Number(fontSize),
@@ -137,7 +137,16 @@ export const PositionSetter = ({
                             height,
                             width,
                         })
-                    }
+                        console.log({
+                            color,
+                            fontSize: Number(fontSize),
+                            textAlign,
+                            left,
+                            top,
+                            height,
+                            width,
+                        })
+                    }}
                 >
                     Update Position
                 </button>

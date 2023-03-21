@@ -1,38 +1,78 @@
 import React from 'react'
-import { useRaceContextState } from '../../race-context'
+import { useRaceContext } from '../../race-context'
 import * as Types from '../../types'
-import { LAYOUTS } from '../../layouts'
 import { PositionSetter } from './PositionSetter'
 import { Card } from '../../components/Card'
 import { ImageMeasure } from '../ImageMeasure'
 import { LayoutWindow } from '../../layout/Layout'
 
-const setter = (val: Partial<Types.TextLayout>) => {}
+const setter = (val: Types.TextLayout) => {}
 
 export const PositionsEditor = () => {
-    const { selectedLayoutCollectionId, activeLayoutId } = useRaceContextState()
+    const {
+        selectedLayoutCollectionId,
+        activeLayoutId,
+        layoutLibrary,
+        activeLayout,
+        updatePosition,
+    } = useRaceContext()
     const [positionNumber, setPositionNumber] = React.useState('')
 
     const { prizePool, commentators, places, racers, highlight } =
-        LAYOUTS[selectedLayoutCollectionId].layouts[activeLayoutId].positions
+        layoutLibrary[selectedLayoutCollectionId].layouts[activeLayoutId]
+            .positions
 
     const positionList = [
-        { name: 'Prize Pool', value: prizePool, setter },
-        { name: 'Commentators', value: commentators, setter },
+        {
+            name: 'Prize Pool',
+            value: prizePool,
+            setter: (position: Types.TextLayout) =>
+                updatePosition({
+                    position,
+                    positionKey: 'prizePool',
+                }),
+        },
+        {
+            name: 'Commentators',
+            value: commentators,
+            setter: (position: Types.TextLayout) =>
+                updatePosition({
+                    position,
+                    positionKey: 'commentators',
+                }),
+        },
         ...places.map((place, index) => ({
             name: `Place ${index + 1}`,
             value: place,
-            setter,
+            setter: (newPlace: Types.TextLayout) => {
+                const position = [...activeLayout.positions.places]
+                position[index] = newPlace
+                updatePosition({
+                    position,
+                    positionKey: 'places',
+                })
+            },
         })),
         ...racers.map((racer, index) => ({
             name: `Racer ${index + 1}`,
             value: racer,
-            setter,
+            setter: (newRacer: Types.TextLayout) => {
+                const position = [...activeLayout.positions.racers]
+                position[index] = newRacer
+                updatePosition({
+                    position,
+                    positionKey: 'racers',
+                })
+            },
         })),
         ...highlight.map((highlightedItem, index) => ({
             name: `Highlight ${index + 1}`,
             value: highlightedItem,
-            setter,
+            setter: (position: Types.TextLayout) =>
+                updatePosition({
+                    position: [position],
+                    positionKey: 'highlight',
+                }),
         })),
     ]
 
