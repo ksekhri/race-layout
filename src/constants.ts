@@ -29,7 +29,7 @@ export const DEFAULT_STATE: Omit<
                 'All Racers': {
                     name: 'All Racers',
                     background:
-                        'https://istation64.com/racelayout/assets/4.png',
+                        'https://istation64.com/racelayout/assets/4.jpg',
                     positions: {
                         prizePool: DEFAULT_TEXT_LAYOUT,
                         commentators: DEFAULT_TEXT_LAYOUT,
@@ -95,7 +95,7 @@ export const DEFAULT_STATE: Omit<
                 'All Racers': {
                     name: 'All Racers',
                     background:
-                        'https://istation64.com/racelayout/assets/5.png',
+                        'https://istation64.com/racelayout/assets/5.jpg',
                     positions: {
                         prizePool: DEFAULT_TEXT_LAYOUT,
                         commentators: DEFAULT_TEXT_LAYOUT,
