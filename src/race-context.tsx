@@ -7,6 +7,7 @@ import { DEFAULT_STATE } from './constants'
 const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 
 type Updater = {
+    setLayoutLibrary: (layoutLibrary: Types.State['layoutLibrary']) => void
     setPrizePool: (prizePool: Types.State['prizePool']) => void
     setCommentators: (commentators: Types.State['commentators']) => void
     setLayoutCollectionId: (
@@ -82,7 +83,7 @@ export const RaceContextProvider = ({
             ? {
                   ...DEFAULT_STATE,
                   ...JSON.parse(savedData),
-                  layoutLibrary: DEFAULT_STATE.layoutLibrary,
+                  // layoutLibrary: DEFAULT_STATE.layoutLibrary,
               }
             : DEFAULT_STATE
     })
@@ -103,6 +104,10 @@ export const RaceContextProvider = ({
             window.removeEventListener('storage', handleStorageChange)
         }
     }, [])
+
+    const setLayoutLibrary = (layoutLibrary: Types.State['layoutLibrary']) => {
+        setData({ ...data, layoutLibrary })
+    }
 
     const setPrizePool = (prizePool: Types.State['prizePool']) => {
         setData({ ...data, prizePool })
@@ -261,8 +266,8 @@ export const RaceContextProvider = ({
 
     const updatePosition = ({
         position,
-        layoutCollectionId = data.selectedLayoutCollectionId,
-        layoutId = data.activeLayoutId,
+        layoutCollectionId = selectedLayoutCollectionId,
+        layoutId = activeLayoutId,
         positionKey,
     }: {
         layoutId?: string
@@ -307,6 +312,7 @@ export const RaceContextProvider = ({
                 ...data,
                 getRacer,
                 selectedLayoutCollection,
+                selectedLayoutCollectionId,
                 getLayout,
                 activeLayoutId,
                 activeLayout,
@@ -315,6 +321,7 @@ export const RaceContextProvider = ({
         >
             <RaceContextUpdater.Provider
                 value={{
+                    setLayoutLibrary,
                     setPrizePool,
                     setCommentators,
                     setLayoutCollectionId,
