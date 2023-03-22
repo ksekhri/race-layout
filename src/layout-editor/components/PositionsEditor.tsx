@@ -6,8 +6,6 @@ import { Card } from '../../components/Card'
 import { ImageMeasure, Rectangle } from '../ImageMeasure'
 import { LayoutWindow } from '../../layout/Layout'
 
-const setter = (val: Types.TextLayout) => {}
-
 export const PositionsEditor = () => {
     const {
         selectedLayoutCollectionId,
@@ -121,7 +119,7 @@ export const PositionsEditor = () => {
                     <>
                         <h2>Place Item</h2>
                         <ImageMeasure
-                            imageUrl="https://istation64.com/racelayout/assets/4h.png"
+                            imageUrl={activeLayout.background}
                             rect={rect}
                             setRect={setRect}
                         />
