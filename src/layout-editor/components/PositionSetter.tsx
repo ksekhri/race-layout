@@ -51,9 +51,14 @@ export const PositionSetter = ({
         }
     }, [rect])
 
-    const updateRect = (item: keyof Rectangle, value: string) => {
-        if (value !== '.') {
-            setRect({ ...rect, [item]: Number(value) })
+    const updateRect = () => {
+        if (rect) {
+            setRect({
+                top: Number(top),
+                left: Number(left),
+                width: Number(width),
+                height: Number(height),
+            })
         }
     }
 
@@ -123,8 +128,8 @@ export const PositionSetter = ({
                         value={left}
                         onChange={(event) => {
                             setLeft(event.target.value)
-                            updateRect('left', event.target.value)
                         }}
+                        onBlur={updateRect}
                     />
                 </div>
                 <div className="mt-2">
@@ -132,10 +137,8 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={top}
-                        onChange={(event) => {
-                            setTop(event.target.value)
-                            updateRect('top', event.target.value)
-                        }}
+                        onChange={(event) => setTop(event.target.value)}
+                        onBlur={updateRect}
                     />
                 </div>
                 <div className="mt-2">
@@ -143,10 +146,8 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={height}
-                        onChange={(event) => {
-                            setHeight(event.target.value)
-                            updateRect('height', event.target.value)
-                        }}
+                        onChange={(event) => setHeight(event.target.value)}
+                        onBlur={updateRect}
                     />
                 </div>
                 <div className="mt-2">
@@ -154,10 +155,8 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={width}
-                        onChange={(event) => {
-                            setWidth(event.target.value)
-                            updateRect('width', event.target.value)
-                        }}
+                        onChange={(event) => setWidth(event.target.value)}
+                        onBlur={updateRect}
                     />
                 </div>
             </div>
@@ -190,10 +189,12 @@ export const PositionSetter = ({
 const PercentInput = ({
     value,
     onChange,
+    onBlur,
     className,
 }: {
     value?: string
     onChange?: React.ChangeEventHandler<HTMLInputElement>
+    onBlur?: React.FocusEventHandler<HTMLInputElement>
     className?: string
 }) => (
     <>
@@ -206,6 +207,7 @@ const PercentInput = ({
                     onChange?.(event)
                 }
             }}
+            onBlur={onBlur}
         />
         %
     </>
