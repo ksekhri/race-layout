@@ -13,7 +13,7 @@ export type State = {
     highlightedRacerId: string
 }
 
-type LayoutLibrary = Record<string, LayoutCollection>
+export type LayoutLibrary = Record<string, LayoutCollection>
 
 export type Racer = {
     name: string
