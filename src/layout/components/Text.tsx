@@ -4,7 +4,7 @@ import { useLayoutContext } from '../layout-context'
 
 export const Text = ({
     text,
-    positions: { fontSize, ...positions },
+    positions: { fontSize, left, top, width, height, ...positions },
 }: {
     positions: Types.TextLayout
     text: string
@@ -39,6 +39,10 @@ export const Text = ({
             className="absolute"
             style={{
                 ...positions,
+                left: `${left}%`,
+                top: `${top}%`,
+                width: `${width}%`,
+                height: `${height}%`,
                 fontSize: `${containerOffsetSize.width / fontSize}px`,
             }}
             ref={outerRef}

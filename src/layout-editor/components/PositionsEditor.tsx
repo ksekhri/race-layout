@@ -3,7 +3,7 @@ import { useRaceContext } from '../../race-context'
 import * as Types from '../../types'
 import { PositionSetter } from './PositionSetter'
 import { Card } from '../../components/Card'
-import { ImageMeasure } from '../ImageMeasure'
+import { ImageMeasure, Rectangle } from '../ImageMeasure'
 import { LayoutWindow } from '../../layout/Layout'
 
 const setter = (val: Types.TextLayout) => {}
@@ -21,6 +21,7 @@ export const PositionsEditor = () => {
     const { prizePool, commentators, places, racers, highlight } =
         layoutLibrary[selectedLayoutCollectionId].layouts[activeLayoutId]
             .positions
+    const [rect, setRect] = React.useState<Rectangle | null>(null)
 
     const positionList = [
         {
@@ -103,6 +104,8 @@ export const PositionsEditor = () => {
                         name={selectedItem.name}
                         value={selectedItem.value}
                         setter={selectedItem.setter}
+                        rect={rect}
+                        setRect={setRect}
                         cancel={() => setPositionNumber('')}
                     />
                 )}
@@ -119,9 +122,8 @@ export const PositionsEditor = () => {
                         <h2>Place Item</h2>
                         <ImageMeasure
                             imageUrl="https://istation64.com/racelayout/assets/4h.png"
-                            onMeasure={(measurements) =>
-                                console.log(measurements)
-                            }
+                            rect={rect}
+                            setRect={setRect}
                         />
                     </>
                 )}

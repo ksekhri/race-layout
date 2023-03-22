@@ -79,7 +79,11 @@ export const RaceContextProvider = ({
     const [data, setData] = React.useState<Types.State>(() => {
         const savedData = localStorage.getItem(LOCAL_STORAGE_DATA_KEY)
         return savedData
-            ? { ...DEFAULT_STATE, ...JSON.parse(savedData) }
+            ? {
+                  ...DEFAULT_STATE,
+                  ...JSON.parse(savedData),
+                  layoutLibrary: DEFAULT_STATE.layoutLibrary,
+              }
             : DEFAULT_STATE
     })
 

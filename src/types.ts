@@ -42,12 +42,12 @@ export type Positions = {
 }
 
 export type TextLayout = {
-    left: string
-    top: string
+    left: number
+    top: number
     fontSize: number
     color: string
-    width: string
-    height: string
+    width: number
+    height: number
     textAlign: 'left' | 'center' | 'right'
 }
 

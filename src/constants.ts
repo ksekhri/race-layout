@@ -1,12 +1,12 @@
 import * as Types from './types'
 
 export const DEFAULT_TEXT_LAYOUT: Types.TextLayout = {
-    left: '20%',
-    top: '20%',
+    left: 20,
+    top: 20,
     fontSize: 20,
     color: '#ffffff',
-    width: '20%',
-    height: '10%',
+    width: 20,
+    height: 10,
     textAlign: 'left',
 }
 
@@ -54,21 +54,21 @@ export const DEFAULT_STATE: Omit<
                         'https://istation64.com/racelayout/assets/4h.png',
                     positions: {
                         prizePool: {
-                            left: '1.85%',
-                            top: '14.9%',
+                            left: 1.85,
+                            top: 14.9,
                             fontSize: 30,
                             color: '#ffffff',
-                            width: '18.6%',
-                            height: '9.5%',
+                            width: 18.6,
+                            height: 9.5,
                             textAlign: 'center',
                         },
                         commentators: {
-                            left: '1.85%',
-                            top: '29.8%',
+                            left: 1.85,
+                            top: 29.8,
                             fontSize: 30,
                             color: '#ffffff',
-                            width: '18.6%',
-                            height: '39.6%',
+                            width: 18.6,
+                            height: 39.6,
                             textAlign: 'center',
                         },
                         places: [

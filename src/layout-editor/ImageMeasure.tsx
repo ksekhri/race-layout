@@ -1,73 +1,78 @@
 import React from 'react'
 
-type Rectangle = {
-    x: number
-    y: number
+export type Rectangle = {
+    left: number
+    top: number
     width: number
     height: number
 }
 
 export const ImageMeasure = ({
     imageUrl,
-    onMeasure,
+    rect,
+    setRect,
 }: {
     imageUrl: string
-    onMeasure: any
+    rect: Rectangle | null
+    setRect: (rect: Rectangle | null) => void
 }) => {
     const [dragging, setDragging] = React.useState(false)
-    const [rect, setRect] = React.useState<Rectangle | null>(null)
     const [start, setStart] = React.useState<Rectangle | null>(null)
     const imageRef = React.useRef<HTMLImageElement | null>(null)
     const containerRef = React.useRef<HTMLDivElement | null>(null)
+
+    React.useEffect(() => {
+        const handleMouseUp = () => {
+            setDragging(false)
+        }
+        document.body.addEventListener('mouseup', handleMouseUp)
+
+        return () => document.body.removeEventListener('mouseup', handleMouseUp)
+    }, [])
 
     const handleMouseDown = (event: React.MouseEvent<HTMLImageElement>) => {
         event.preventDefault()
         setDragging(true)
         const { offsetLeft, offsetTop } = containerRef.current!
-        const x = event.pageX - offsetLeft
-        const y = event.pageY - offsetTop
-        setRect({ x, y, width: 0, height: 0 })
-        setStart({ x, y, width: 0, height: 0 })
+        const left = event.pageX - offsetLeft
+        const top = event.pageY - offsetTop
+        setStart({ left, top, width: 0, height: 0 })
     }
 
     const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (!dragging || !rect || !start || !containerRef.current) {
+        if (!dragging || !start || !containerRef.current) {
             return
         }
         const { offsetLeft, offsetTop } = containerRef.current
         const mouseX = event.pageX - offsetLeft
         const mouseY = event.pageY - offsetTop
-        const x = mouseX > start.x ? start.x : event.pageX - offsetLeft
-        const y = mouseY > start.y ? start.y : event.pageY - offsetTop
-        const width = mouseX > start.x ? mouseX - start.x : start.x - mouseX
-        const height = mouseY > start.y ? mouseY - start.y : start.y - mouseY
-        setRect({ width, height, x, y })
+        const left = mouseX > start.left ? start.left : event.pageX - offsetLeft
+        const top = mouseY > start.top ? start.top : event.pageY - offsetTop
+        const width =
+            mouseX > start.left ? mouseX - start.left : start.left - mouseX
+        const height =
+            mouseY > start.top ? mouseY - start.top : start.top - mouseY
+        setRect(getPercentageRect({ width, height, left, top }))
     }
 
-    const handleMouseUp = () => {
-        setDragging(false)
-        console.log(getPercentageRect())
-    }
-
-    const getPercentageRect = () => {
-        if (!rect || !imageRef.current) {
+    const getPercentageRect = (rawRect: Rectangle | null) => {
+        if (!rawRect || !imageRef.current) {
             return null
         }
         const { width, height } = imageRef.current.getBoundingClientRect()
         return {
-            x: (rect.x / width) * 100,
-            y: (rect.y / height) * 100,
-            width: (rect.width / width) * 100,
-            height: (rect.height / height) * 100,
+            left: (rawRect.left / width) * 100,
+            top: (rawRect.top / height) * 100,
+            width: (rawRect.width / width) * 100,
+            height: (rawRect.height / height) * 100,
         }
     }
 
     return (
         <div
-            style={{ position: 'relative', width: '100%', height: '100%' }}
+            style={{ position: 'relative' }}
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
         >
             <img
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
@@ -79,11 +84,11 @@ export const ImageMeasure = ({
                 <div
                     style={{
                         position: 'absolute',
-                        left: rect.x,
-                        top: rect.y,
-                        width: rect.width,
-                        height: rect.height,
-                        border: '2px dashed red',
+                        left: `${rect.left}%`,
+                        top: `${rect.top}%`,
+                        width: `${rect.width}%`,
+                        height: `${rect.height}%`,
+                        border: '2px dashed white',
                         pointerEvents: 'none',
                     }}
                 />

@@ -1,35 +1,61 @@
 import React from 'react'
 import { FloatInput } from '../../components/FloatInput'
 import * as Types from '../../types'
+import { Rectangle } from '../ImageMeasure'
 
 export const PositionSetter = ({
     name,
     value,
     setter,
+    rect,
+    setRect,
     cancel,
 }: {
     name: string
     value: Types.TextLayout
     setter: (layout: Types.TextLayout) => void
+    rect: Rectangle | null
+    setRect: (rect: Rectangle) => void
     cancel: () => void
 }) => {
     const [color, setColor] = React.useState(value.color)
     const [fontSize, setFontSize] = React.useState(String(value.fontSize))
     const [textAlign, setTextAlign] = React.useState(value.textAlign)
-    const [left, setLeft] = React.useState(value.left)
-    const [top, setTop] = React.useState(value.top)
-    const [height, setHeight] = React.useState(value.height)
-    const [width, setWidth] = React.useState(value.width)
+    const [left, setLeft] = React.useState(String(value.left))
+    const [top, setTop] = React.useState(String(value.top))
+    const [height, setHeight] = React.useState(String(value.height))
+    const [width, setWidth] = React.useState(String(value.width))
 
     React.useEffect(() => {
         setColor(value.color)
         setFontSize(String(value.fontSize))
         setTextAlign(value.textAlign)
-        setLeft(value.left)
-        setTop(value.top)
-        setHeight(value.height)
-        setWidth(value.width)
+        setLeft(String(value.left))
+        setTop(String(value.top))
+        setHeight(String(value.height))
+        setWidth(String(value.width))
+        setRect({
+            top: Number(value.top),
+            left: Number(value.left),
+            width: Number(value.width),
+            height: Number(value.height),
+        })
     }, [value])
+
+    React.useEffect(() => {
+        if (rect) {
+            setLeft(String(rect.left))
+            setTop(String(rect.top))
+            setHeight(String(rect.height))
+            setWidth(String(rect.width))
+        }
+    }, [rect])
+
+    const updateRect = (item: keyof Rectangle, value: string) => {
+        if (value !== '.') {
+            setRect({ ...rect, [item]: Number(value) })
+        }
+    }
 
     const disabled =
         !!color &&
@@ -40,13 +66,13 @@ export const PositionSetter = ({
         !!textAlign &&
         textAlign === value.textAlign &&
         !!left &&
-        left === value.left &&
+        left === String(value.left) &&
         !!top &&
-        top === value.top &&
+        top === String(value.top) &&
         !!height &&
-        height === value.height &&
+        height === String(value.height) &&
         !!width &&
-        width === value.width
+        width === String(value.width)
 
     return (
         <div>
@@ -95,7 +121,10 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={left}
-                        onChange={(event) => setLeft(event.target.value)}
+                        onChange={(event) => {
+                            setLeft(event.target.value)
+                            updateRect('left', event.target.value)
+                        }}
                     />
                 </div>
                 <div className="mt-2">
@@ -103,7 +132,10 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={top}
-                        onChange={(event) => setTop(event.target.value)}
+                        onChange={(event) => {
+                            setTop(event.target.value)
+                            updateRect('top', event.target.value)
+                        }}
                     />
                 </div>
                 <div className="mt-2">
@@ -111,7 +143,10 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={height}
-                        onChange={(event) => setHeight(event.target.value)}
+                        onChange={(event) => {
+                            setHeight(event.target.value)
+                            updateRect('height', event.target.value)
+                        }}
                     />
                 </div>
                 <div className="mt-2">
@@ -119,7 +154,10 @@ export const PositionSetter = ({
                     <PercentInput
                         className="ml-2"
                         value={width}
-                        onChange={(event) => setWidth(event.target.value)}
+                        onChange={(event) => {
+                            setWidth(event.target.value)
+                            updateRect('width', event.target.value)
+                        }}
                     />
                 </div>
             </div>
@@ -132,19 +170,10 @@ export const PositionSetter = ({
                             color,
                             fontSize: Number(fontSize),
                             textAlign,
-                            left,
-                            top,
-                            height,
-                            width,
-                        })
-                        console.log({
-                            color,
-                            fontSize: Number(fontSize),
-                            textAlign,
-                            left,
-                            top,
-                            height,
-                            width,
+                            left: Number(left),
+                            top: Number(top),
+                            height: Number(height),
+                            width: Number(width),
                         })
                     }}
                 >
@@ -167,14 +196,17 @@ const PercentInput = ({
     onChange?: React.ChangeEventHandler<HTMLInputElement>
     className?: string
 }) => (
-    <input
-        className={className}
-        type="text"
-        value={value}
-        onChange={(event) => {
-            if (/^\d*\.?\d*%?$/.test(event.target.value)) {
-                onChange?.(event)
-            }
-        }}
-    />
+    <>
+        <input
+            className={className}
+            type="text"
+            value={value}
+            onChange={(event) => {
+                if (/^\d*\.?\d*%?$/.test(event.target.value)) {
+                    onChange?.(event)
+                }
+            }}
+        />
+        %
+    </>
 )
