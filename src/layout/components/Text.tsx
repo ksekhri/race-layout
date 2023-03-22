@@ -32,7 +32,7 @@ export const Text = ({
                 containerOffsetSize.width / updatedFontSize
             }px`
         }
-    }, [text, containerOffsetSize])
+    }, [text, containerOffsetSize, positions])
 
     return (
         <div
