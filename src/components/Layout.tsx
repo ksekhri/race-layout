@@ -18,6 +18,7 @@ export const Layout = ({
     return (
         <div>
             <input
+                disabled
                 type="radio"
                 id={id}
                 value={layout.name}

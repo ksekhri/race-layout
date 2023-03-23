@@ -1,4 +1,5 @@
 export type State = {
+    localVersion: string
     prizePool: number
     commentators: string
     layoutLibrary: LayoutLibrary

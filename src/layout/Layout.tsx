@@ -3,7 +3,7 @@ import { RaceContextProvider } from '../race-context'
 import { PrizePool } from './components/PrizePool'
 import { Background } from './components/Background'
 import { Commentators } from './components/Commentators'
-// import { Racers } from './components/Racers'
+import { Racers } from './components/Racers'
 import { useOffsetSize } from '../hooks'
 import { LayoutContextProvider } from './layout-context'
 
@@ -17,7 +17,7 @@ export const LayoutWindow = () => {
                 <Background />
                 <PrizePool />
                 <Commentators />
-                {/* <Racers /> */}
+                <Racers />
             </div>
         </LayoutContextProvider>
     )

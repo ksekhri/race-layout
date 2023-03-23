@@ -41,12 +41,14 @@ export const ActiveRacer = ({
                 ))}
             </select>
             <input
+                disabled
                 type="text"
                 value={time}
                 placeholder="time"
                 onChange={(event) => setTime(event.target.value)}
             />
             <input
+                disabled
                 type="text"
                 value={pb}
                 placeholder="pb"
@@ -54,12 +56,13 @@ export const ActiveRacer = ({
             />
             {dirty && (
                 <button
+                    disabled
                     className="btn"
                     onClick={() => {
                         updateRacer({ name: activeRacer.name, time, pb })
                     }}
                 >
-                    Update racer
+                    Update
                 </button>
             )}
         </div>

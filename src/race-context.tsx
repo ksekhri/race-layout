@@ -4,6 +4,7 @@ import * as Types from './types'
 import { DEFAULT_TEXT_LAYOUT } from './constants'
 import { DEFAULT_STATE } from './constants'
 
+const WEB_VERSION = '0.0.2'
 const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 
 type Updater = {
@@ -83,7 +84,7 @@ export const RaceContextProvider = ({
             ? {
                   ...DEFAULT_STATE,
                   ...JSON.parse(savedData),
-                  // layoutLibrary: DEFAULT_STATE.layoutLibrary,
+                  layoutLibrary: DEFAULT_STATE.layoutLibrary,
               }
             : DEFAULT_STATE
     })

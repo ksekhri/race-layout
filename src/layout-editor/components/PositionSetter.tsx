@@ -104,14 +104,15 @@ export const PositionSetter = ({
                     />
                 </div>
                 <div className="mt-2">
-                    Text Align:
+                    Horizontal Alignment:
                     <select
                         className="ml-2"
                         value={textAlign}
                         onChange={(event) => {
                             if (
                                 event.target.value === 'center' ||
-                                event.target.value === 'left'
+                                event.target.value === 'left' ||
+                                event.target.value === 'right'
                             ) {
                                 setTextAlign(event.target.value)
                             }
@@ -119,6 +120,7 @@ export const PositionSetter = ({
                     >
                         <option value="center">Center</option>
                         <option value="left">Left</option>
+                        <option value="right">Right</option>
                     </select>
                 </div>
                 <div className="mt-2">
@@ -163,7 +165,7 @@ export const PositionSetter = ({
             <div className="btn-row">
                 <button
                     className="btn"
-                    disabled={disabled}
+                    disabled={disabled || true}
                     onClick={() => {
                         setter({
                             color,

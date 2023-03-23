@@ -16,13 +16,13 @@ export const AddNewRacer = () => {
                 onChange={(event) => setName(event.target.value)}
             />
             <input
+                disabled
                 type="text"
                 value={pb}
                 placeholder="pb"
                 onChange={(event) => setPb(event.target.value)}
             />
             <button
-                disabled
                 className="btn"
                 onClick={() => {
                     addRacer({ name, pb, time: '' })
@@ -30,7 +30,7 @@ export const AddNewRacer = () => {
                     setPb('')
                 }}
             >
-                Add new racer
+                Add New Racer
             </button>
         </div>
     )
