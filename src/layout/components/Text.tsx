@@ -21,6 +21,8 @@ export const Text = ({
         outerRef.current.style.fontSize = `${
             containerOffsetSize.width / updatedFontSize
         }px`
+        innerRef.current.style.position = 'initial'
+        innerRef.current.style.transform = '0'
         while (
             (innerRef.current.offsetWidth > outerRef.current.offsetWidth ||
                 innerRef.current.offsetHeight >
@@ -32,6 +34,11 @@ export const Text = ({
                 containerOffsetSize.width / updatedFontSize
             }px`
         }
+        innerRef.current.style.position = 'absolute'
+        innerRef.current.style.top = '50%'
+        innerRef.current.style.left = '0'
+        innerRef.current.style.right = '0'
+        innerRef.current.style.transform = 'translateY(-50%)'
     }, [text, containerOffsetSize, positions])
 
     return (

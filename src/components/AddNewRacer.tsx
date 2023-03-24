@@ -6,6 +6,8 @@ export const AddNewRacer = () => {
     const [name, setName] = React.useState('')
     const [pb, setPb] = React.useState('')
 
+    const disabled = name === ''
+
     return (
         <div>
             <h3>Add New Racer</h3>
@@ -23,6 +25,7 @@ export const AddNewRacer = () => {
                 onChange={(event) => setPb(event.target.value)}
             />
             <button
+                disabled={disabled}
                 className="btn"
                 onClick={() => {
                     addRacer({ name, pb, time: '' })

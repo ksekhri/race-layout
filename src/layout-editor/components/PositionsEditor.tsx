@@ -97,7 +97,8 @@ export const PositionsEditor = () => {
                         </option>
                     ))}
                 </select>
-                {positionNumber !== '' && (
+                {/* Check selectedItem to handle case where user is editing highlight and switches to highlight free layout */}
+                {selectedItem && positionNumber !== '' && (
                     <PositionSetter
                         name={selectedItem.name}
                         value={selectedItem.value}

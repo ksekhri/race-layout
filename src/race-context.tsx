@@ -4,7 +4,7 @@ import * as Types from './types'
 import { DEFAULT_TEXT_LAYOUT } from './constants'
 import { DEFAULT_STATE } from './constants'
 
-const WEB_VERSION = '0.0.2'
+const WEB_VERSION = '0.0.3'
 const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 
 type Updater = {
@@ -21,11 +21,11 @@ type Updater = {
     updateRacer: (racer: Types.Racer) => void
     removeRacer: (racerId: string) => void
     setRacers: (racers: Types.State['racers']) => void
-    updateLayout: (data: {
-        layout: Types.Layout
-        layoutId: string
-        layoutCollectionId: string
-    }) => void
+    duplicateLayoutCollection: (name: string) => void
+    updateActiveLayout: (
+        layout: Partial<Types.Layout>,
+        highlighted?: boolean
+    ) => void
     updatePosition: (
         data: {
             layoutId?: string
@@ -85,6 +85,7 @@ export const RaceContextProvider = ({
                   ...DEFAULT_STATE,
                   ...JSON.parse(savedData),
                   layoutLibrary: DEFAULT_STATE.layoutLibrary,
+                  localVersion: WEB_VERSION,
               }
             : DEFAULT_STATE
     })
@@ -125,6 +126,7 @@ export const RaceContextProvider = ({
             ...data,
             selectedLayoutCollectionId,
             activeLayoutId: '',
+            highlightedRacerId: '',
         })
     }
 
@@ -241,24 +243,46 @@ export const RaceContextProvider = ({
                       highlight: [],
                   },
               }
-    const updateLayout = ({
-        layout,
-        layoutCollectionId,
-        layoutId,
-    }: {
-        layout: Types.Layout
-        layoutId: string
-        layoutCollectionId: string
-    }) => {
+
+    const duplicateLayoutCollection = (name: string) => {
         setData({
             ...data,
             layoutLibrary: {
                 ...data.layoutLibrary,
-                [layoutCollectionId]: {
-                    ...data.layoutLibrary[layoutCollectionId],
+                [name]: {
+                    ...data.layoutLibrary[selectedLayoutCollectionId],
+                    name,
+                },
+            },
+        })
+    }
+
+    const updateActiveLayout = (
+        layout: Partial<Types.Layout>,
+        highlighted?: boolean
+    ) => {
+        setData({
+            ...data,
+            layoutLibrary: {
+                ...data.layoutLibrary,
+                [selectedLayoutCollectionId]: {
+                    ...data.layoutLibrary[selectedLayoutCollectionId],
                     layouts: {
-                        ...data.layoutLibrary[layoutCollectionId].layouts,
-                        [layoutId]: layout,
+                        ...data.layoutLibrary[selectedLayoutCollectionId]
+                            .layouts,
+                        [activeLayoutId]: {
+                            ...data.layoutLibrary[selectedLayoutCollectionId]
+                                .layouts[activeLayoutId],
+                            positions: {
+                                ...data.layoutLibrary[
+                                    selectedLayoutCollectionId
+                                ].layouts[activeLayoutId].positions,
+                                highlight: highlighted
+                                    ? [DEFAULT_TEXT_LAYOUT]
+                                    : [],
+                            },
+                            ...layout,
+                        },
                     },
                 },
             },
@@ -333,7 +357,8 @@ export const RaceContextProvider = ({
                     setRacers,
                     updateRacer,
                     removeRacer,
-                    updateLayout,
+                    duplicateLayoutCollection,
+                    updateActiveLayout,
                     updatePosition,
                 }}
             >

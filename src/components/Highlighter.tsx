@@ -8,13 +8,7 @@ export const Highlighter = ({ racerId }: { racerId: string }) => {
 
     const isHighlighed = racerId !== '' && highlightedRacerId === racerId
 
-    const onClick = () => {
-        if (isHighlighed) {
-            setHighlightedRacer('')
-        } else {
-            racerId && setHighlightedRacer(racerId)
-        }
-    }
+    const onClick = () => racerId && setHighlightedRacer(racerId)
 
     return (
         <button onClick={onClick}>

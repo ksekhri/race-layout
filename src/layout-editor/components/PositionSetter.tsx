@@ -165,7 +165,7 @@ export const PositionSetter = ({
             <div className="btn-row">
                 <button
                     className="btn"
-                    disabled={disabled || true}
+                    disabled={disabled}
                     onClick={() => {
                         setter({
                             color,

@@ -1,9 +1,9 @@
 import React from 'react'
-import { useRaceContext } from '../../race-context'
-import * as Types from '../../types'
-import { LayoutCollectionSelector } from '../../components/LayoutCollectionSelector'
-import { DownloadObject } from './DownloadObject'
-import UploadObject from './UploadObject'
+import { useRaceContext } from '../../../race-context'
+import * as Types from '../../../types'
+import { LayoutCollectionSelector } from '../../../components/LayoutCollectionSelector'
+import { DownloadObject } from '../DownloadObject'
+import UploadObject from '../UploadObject'
 
 export const LayoutCollectionEditor = ({
     onAddCollection,
@@ -22,7 +22,10 @@ export const LayoutCollectionEditor = ({
                     className="btn"
                     onClick={() => onAddCollection()}
                 >
-                    Add New Collection...
+                    Edit Collection...
+                </button>
+                <button className="btn" onClick={() => onAddCollection()}>
+                    Add Collection...
                 </button>
                 <DownloadObject
                     className="btn ml-4"

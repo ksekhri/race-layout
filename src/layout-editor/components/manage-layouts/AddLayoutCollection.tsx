@@ -58,7 +58,11 @@ export const AddLayoutCollection = ({
                 }}
             />
             <div className="mt-4">
-                <button className="btn" disabled={disabled}>
+                <button
+                    className="btn"
+                    // TODO: Test
+                    disabled={disabled || true}
+                >
                     Add Collection
                 </button>
                 <button
