@@ -6,6 +6,7 @@ import { Commentators } from './components/Commentators'
 import { Racers } from './components/Racers'
 import { useOffsetSize } from '../hooks'
 import { LayoutContextProvider } from './layout-context'
+import { Places } from './components/Places'
 
 export const LayoutWindow = () => {
     const ref = React.useRef(null)
@@ -18,6 +19,7 @@ export const LayoutWindow = () => {
                 <PrizePool />
                 <Commentators />
                 <Racers />
+                <Places />
             </div>
         </LayoutContextProvider>
     )

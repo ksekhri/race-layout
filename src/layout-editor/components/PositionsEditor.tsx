@@ -16,7 +16,7 @@ export const PositionsEditor = () => {
     } = useRaceContext()
     const [positionNumber, setPositionNumber] = React.useState('')
 
-    const { prizePool, commentators, places, racers, highlight } =
+    const { prizePool, commentators, places, racers, highlight, highlightPb } =
         layoutLibrary[selectedLayoutCollectionId].layouts[activeLayoutId]
             .positions
     const [rect, setRect] = React.useState<Rectangle | null>(null)
@@ -71,6 +71,15 @@ export const PositionsEditor = () => {
                 updatePosition({
                     position: [position],
                     positionKey: 'highlight',
+                }),
+        })),
+        ...highlightPb.map((highlightedItem, index) => ({
+            name: `Highlight PB ${index + 1}`,
+            value: highlightedItem,
+            setter: (position: Types.TextLayout) =>
+                updatePosition({
+                    position: [position],
+                    positionKey: 'highlightPb',
                 }),
         })),
     ]

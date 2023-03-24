@@ -12,6 +12,7 @@ export type State = {
     racers: Record<string, Racer>
     getRacer: (racerId: string) => Racer
     highlightedRacerId: string
+    places: number[]
 }
 
 export type LayoutLibrary = Record<string, LayoutCollection>
@@ -40,6 +41,7 @@ export type Positions = {
     places: TextLayout[]
     racers: TextLayout[]
     highlight: TextLayout[]
+    highlightPb: TextLayout[]
 }
 
 export type TextLayout = {
@@ -50,6 +52,7 @@ export type TextLayout = {
     width: number
     height: number
     textAlign: 'left' | 'center' | 'right'
+    flag?: boolean
 }
 
 export type OffsetSize = { width: number; height: number }

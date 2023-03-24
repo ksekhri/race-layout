@@ -2,14 +2,14 @@ import React from 'react'
 import map from 'lodash/map'
 import { useRaceContext } from '../race-context'
 
-export const RemoveRacer = ({}: {}) => {
+export const RemoveRacer = ({ className }: { className?: string }) => {
     const [racerId, setRacerId] = React.useState('')
     const { racers, getRacer, activeRacers, setActiveRacer, removeRacer } =
         useRaceContext()
     const activeRacer = getRacer(racerId)
 
     return (
-        <div>
+        <div className={className}>
             <h3>Remove Racer Permanently</h3>
             <select
                 name="racer"

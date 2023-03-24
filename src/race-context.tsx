@@ -24,7 +24,8 @@ type Updater = {
     duplicateLayoutCollection: (name: string) => void
     updateActiveLayout: (
         layout: Partial<Types.Layout>,
-        highlighted?: boolean
+        highlighted: boolean,
+        placesVisible: number
     ) => void
     updatePosition: (
         data: {
@@ -37,10 +38,17 @@ type Updater = {
               }
             | {
                   position: Types.TextLayout[]
-                  positionKey: 'places' | 'racers' | 'highlight'
+                  positionKey: 'places' | 'racers' | 'highlight' | 'highlightPb'
               }
         )
     ) => void
+    updatePlace: ({
+        updatedPlace,
+        index,
+    }: {
+        updatedPlace: number
+        index: number
+    }) => void
 }
 
 const RaceContextState = React.createContext<Types.State | null>(null)
@@ -176,6 +184,7 @@ export const RaceContextProvider = ({
                 places: [],
                 racers: [],
                 highlight: [],
+                highlightPb: [],
             },
         }
     }
@@ -241,6 +250,7 @@ export const RaceContextProvider = ({
                       places: [],
                       racers: [],
                       highlight: [],
+                      highlightPb: [],
                   },
               }
 
@@ -259,8 +269,28 @@ export const RaceContextProvider = ({
 
     const updateActiveLayout = (
         layout: Partial<Types.Layout>,
-        highlighted?: boolean
+        highlighted: boolean,
+        placesVisible: number
     ) => {
+        const oldPlaces =
+            data.layoutLibrary[selectedLayoutCollectionId].layouts[
+                activeLayoutId
+            ].positions.places
+        let newPlaces: Types.TextLayout[] = []
+        for (let i = 0; i < placesVisible; i++) {
+            newPlaces.push(oldPlaces?.[i] ?? DEFAULT_TEXT_LAYOUT)
+        }
+
+        const oldHighlight =
+            data.layoutLibrary[selectedLayoutCollectionId].layouts[
+                activeLayoutId
+            ].positions.highlight
+        const wasHighlighted = oldHighlight.length === 1
+        let newHighlight: Types.TextLayout[] = oldHighlight
+        if (!!highlighted !== wasHighlighted) {
+            newHighlight = highlighted ? [DEFAULT_TEXT_LAYOUT] : []
+        }
+
         setData({
             ...data,
             layoutLibrary: {
@@ -277,9 +307,8 @@ export const RaceContextProvider = ({
                                 ...data.layoutLibrary[
                                     selectedLayoutCollectionId
                                 ].layouts[activeLayoutId].positions,
-                                highlight: highlighted
-                                    ? [DEFAULT_TEXT_LAYOUT]
-                                    : [],
+                                highlight: newHighlight,
+                                places: newPlaces,
                             },
                             ...layout,
                         },
@@ -304,7 +333,7 @@ export const RaceContextProvider = ({
           }
         | {
               position: Types.TextLayout[]
-              positionKey: 'places' | 'racers' | 'highlight'
+              positionKey: 'places' | 'racers' | 'highlight' | 'highlightPb'
           }
     )) => {
         setData({
@@ -331,6 +360,23 @@ export const RaceContextProvider = ({
         })
     }
 
+    const updatePlace = ({
+        updatedPlace,
+        index,
+    }: {
+        updatedPlace: number
+        index: number
+    }) => {
+        const updatedPlaces = [...data.places].map((currPlace) =>
+            currPlace !== updatedPlace ? currPlace : 0
+        )
+        updatedPlaces[index] = updatedPlace
+        setData({ ...data, places: updatedPlaces })
+    }
+
+    data.layoutLibrary['4 Person Race (Classic)'].layouts['All Racers'] = {
+        ...data.layoutLibrary['4 Person Race'].layouts['All Racers'],
+    }
     return (
         <RaceContextState.Provider
             value={{
@@ -360,6 +406,7 @@ export const RaceContextProvider = ({
                     duplicateLayoutCollection,
                     updateActiveLayout,
                     updatePosition,
+                    updatePlace,
                 }}
             >
                 {children}

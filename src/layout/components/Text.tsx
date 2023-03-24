@@ -4,7 +4,7 @@ import { useLayoutContext } from '../layout-context'
 
 export const Text = ({
     text,
-    positions: { fontSize, left, top, width, height, ...positions },
+    positions: { flag, fontSize, left, top, width, height, ...positions },
 }: {
     positions: Types.TextLayout
     text: string

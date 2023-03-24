@@ -25,6 +25,7 @@ export const PositionSetter = ({
     const [top, setTop] = React.useState(String(value.top))
     const [height, setHeight] = React.useState(String(value.height))
     const [width, setWidth] = React.useState(String(value.width))
+    const [flag, setFlag] = React.useState(value.flag ?? false)
 
     React.useEffect(() => {
         setColor(value.color)
@@ -34,6 +35,7 @@ export const PositionSetter = ({
         setTop(String(value.top))
         setHeight(String(value.height))
         setWidth(String(value.width))
+        setFlag(value.flag ?? false)
         setRect({
             top: Number(value.top),
             left: Number(value.left),
@@ -77,7 +79,8 @@ export const PositionSetter = ({
         !!height &&
         height === String(value.height) &&
         !!width &&
-        width === String(value.width)
+        width === String(value.width) &&
+        flag === !!value.flag
 
     return (
         <div>
@@ -93,6 +96,25 @@ export const PositionSetter = ({
                         }}
                     />
                 </label>
+                {(name.includes('Racer') || name.includes('Highlight')) &&
+                    !name.includes('PB') && (
+                        <div className="mt-2">
+                            <input
+                                type="checkbox"
+                                id="position-flag-check"
+                                checked={flag}
+                                onChange={(event) =>
+                                    setFlag(event.target.checked)
+                                }
+                            />
+                            <label
+                                className="ml-2"
+                                htmlFor="position-flag-check"
+                            >
+                                Show Race Time
+                            </label>
+                        </div>
+                    )}
                 <div className="mt-2">
                     Font Size:
                     <FloatInput
@@ -175,6 +197,7 @@ export const PositionSetter = ({
                             top: Number(top),
                             height: Number(height),
                             width: Number(width),
+                            flag,
                         })
                     }}
                 >

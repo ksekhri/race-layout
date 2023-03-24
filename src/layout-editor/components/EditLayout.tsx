@@ -2,17 +2,23 @@ import React from 'react'
 import { useRaceContext } from '../../race-context'
 
 export const EditLayout = ({ cancel }: { cancel: () => void }) => {
-    const { activeLayout, updateActiveLayout } = useRaceContext()
+    const { activeLayout, updateActiveLayout, selectedLayoutCollection } =
+        useRaceContext()
 
     const [name, setName] = React.useState(activeLayout.name)
     const [background, setBackground] = React.useState(activeLayout.background)
     const [highlighted, setHighlighted] = React.useState(
         activeLayout.positions.highlight.length !== 0
     )
+    const [placesVisible, setPlacesVisible] = React.useState(
+        activeLayout.positions.places.length
+    )
+
     const disabled =
         name === activeLayout.name &&
         background === activeLayout.background &&
-        highlighted === (activeLayout.positions.highlight.length !== 0)
+        highlighted === (activeLayout.positions.highlight.length !== 0) &&
+        placesVisible === activeLayout.positions.places.length
 
     return (
         <div>
@@ -49,12 +55,34 @@ export const EditLayout = ({ cancel }: { cancel: () => void }) => {
                 }}
             />
             <label htmlFor="highlighted">Has Highlight</label>
+            <div>
+                Number of places visible
+                <select
+                    value={placesVisible}
+                    className="ml-2"
+                    onChange={(event) =>
+                        setPlacesVisible(parseInt(event.target.value))
+                    }
+                >
+                    {Array(selectedLayoutCollection.racers + 1)
+                        .fill(null)
+                        .map((_, index) => (
+                            <option key={index} value={index}>
+                                {index}
+                            </option>
+                        ))}
+                </select>
+            </div>
             <div className="btn-row">
                 <button
                     className="btn"
                     disabled={disabled}
                     onClick={() => {
-                        updateActiveLayout({ name, background }, highlighted)
+                        updateActiveLayout(
+                            { name, background },
+                            highlighted,
+                            placesVisible
+                        )
                         cancel()
                     }}
                 >

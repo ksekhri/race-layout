@@ -9,7 +9,7 @@ export const Racers = () => {
         highlightedRacerId,
         selectedLayoutCollection,
         activeLayout: {
-            positions: { racers: racerPositions, highlight },
+            positions: { racers: racerPositions, highlight, highlightPb },
         },
     } = useRaceContextState()
 
@@ -28,14 +28,33 @@ export const Racers = () => {
                 .map((positions, index) => (
                     <Text
                         key={getRacer(visibleRacers[index]).name}
-                        text={getRacer(visibleRacers[index]).name}
+                        text={`${getRacer(visibleRacers[index]).name}${
+                            positions.flag &&
+                            !!getRacer(visibleRacers[index]).time
+                                ? ` - Race time ${
+                                      getRacer(visibleRacers[index]).time
+                                  }`
+                                : ''
+                        }`}
                         positions={positions}
                     />
                 ))}
             {highlight.length > 0 && (
                 <Text
-                    text={getRacer(highlightedRacerId).name}
+                    text={`${getRacer(highlightedRacerId).name}${
+                        highlight[0].flag && !!getRacer(highlightedRacerId).time
+                            ? ` - Race time ${
+                                  getRacer(highlightedRacerId).time
+                              }`
+                            : ''
+                    }`}
                     positions={highlight[0]}
+                />
+            )}
+            {highlightPb.length > 0 && (
+                <Text
+                    text={getRacer(highlightedRacerId).pb}
+                    positions={highlightPb[0]}
                 />
             )}
         </>

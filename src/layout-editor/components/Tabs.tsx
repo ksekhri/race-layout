@@ -25,6 +25,7 @@ export const Tabs = ({
             <div className="inline-flex">
                 {tabList.map(({ name }, index) => (
                     <div
+                        key={index}
                         className={cn(
                             'p-2 mx-5 select-none underline underline-offset-8 decoration-2',
                             {
