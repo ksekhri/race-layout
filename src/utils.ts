@@ -56,3 +56,25 @@ const generatePositionArray = (count: number) =>
     Array(count)
         .fill(null)
         .map(() => DEFAULT_TEXT_LAYOUT)
+
+export const getTimestamp = () => {
+    const now: Date = new Date()
+    const year: number = now.getFullYear()
+    const month: number = now.getMonth() + 1
+    const day: number = now.getDate()
+    const hour: number = now.getHours()
+    const minute: number = now.getMinutes()
+    const second: number = now.getSeconds()
+
+    // Ensure that each component is two digits
+    const formatComponent = (component: number) =>
+        component.toString().padStart(2, '0')
+
+    const formattedDate: string = `${year}-${formatComponent(
+        month
+    )}-${formatComponent(day)}-${formatComponent(hour)}-${formatComponent(
+        minute
+    )}-${formatComponent(second)}`
+
+    return formattedDate
+}

@@ -2,8 +2,9 @@ import React from 'react'
 import { useRaceContext } from '../../../race-context'
 import * as Types from '../../../types'
 import { LayoutCollectionSelector } from '../../../components/LayoutCollectionSelector'
-import { DownloadObject } from '../DownloadObject'
-import UploadObject from '../UploadObject'
+import { DownloadObject } from './DownloadObject'
+import UploadObject from './UploadObject'
+import { getTimestamp } from '../../../utils'
 
 export const LayoutCollectionEditor = ({
     onAddCollection,
@@ -31,11 +32,12 @@ export const LayoutCollectionEditor = ({
                     className="btn ml-4"
                     obj={layoutLibrary}
                     fileDescription={'Backup'}
+                    fileName={`${getTimestamp()}.json`}
                 />
                 <UploadObject
-                    onObjectLoad={(newLibrary: Types.LayoutLibrary) => {
+                    onObjectLoad={(newLibrary: Types.LayoutLibrary) =>
                         setLayoutLibrary(newLibrary)
-                    }}
+                    }
                     className="btn inline-block !py-2 ml-4"
                     title="Restore From Backup..."
                 />

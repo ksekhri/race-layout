@@ -22,9 +22,7 @@ export const DuplicateLayoutCollection = ({
                 type="text"
                 placeholder="New Collection Name"
                 value={collectionName}
-                onChange={(event) => {
-                    setCollectionName(event.target.value)
-                }}
+                onChange={(event) => setCollectionName(event.target.value)}
             />
             <div className="mt-4">
                 <button

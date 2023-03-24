@@ -3,7 +3,7 @@ import { useRaceContext } from '../race-context'
 import { AddNewRacer } from './AddNewRacer'
 import { ActiveRacer } from './ActiveRacer'
 import { RemoveRacer } from './RemoveRacer'
-import { Tabs } from '../layout-editor/components/Tabs'
+import { Tabs } from './Tabs'
 import { UpdateRacers } from './UpdateRacers'
 
 export const RacerConfig = () => {

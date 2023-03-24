@@ -43,9 +43,7 @@ export const ActiveRacer = ({
                 name="racer"
                 className="mr-2"
                 value={activeRacerId}
-                onChange={(event) => {
-                    setActiveRacer(event.target.value, index)
-                }}
+                onChange={(event) => setActiveRacer(event.target.value, index)}
             >
                 <option value="">Select Racer</option>
                 {map(racers, ({ name }, id) => (
@@ -84,9 +82,9 @@ export const ActiveRacer = ({
             <button
                 disabled={!dirty || !activeRacer.name}
                 className="btn"
-                onClick={() => {
+                onClick={() =>
                     updateRacer({ name: activeRacer.name, time, pb })
-                }}
+                }
             >
                 Update
             </button>

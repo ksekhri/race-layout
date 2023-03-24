@@ -3,10 +3,12 @@ import React from 'react'
 export const DownloadObject = <T extends unknown>({
     obj,
     className,
+    fileName = 'text.json',
     fileDescription,
 }: {
     obj: T
     className?: string
+    fileName?: string
     fileDescription?: string
 }) => {
     const [generated, setGenerated] = React.useState(false)
@@ -27,12 +29,10 @@ export const DownloadObject = <T extends unknown>({
                 </button>
             )}
             {generated && (
-                <a href={href} download="text.json">
+                <a href={href} download={fileName}>
                     <button
                         className={className}
-                        onClick={() => {
-                            setGenerated(false)
-                        }}
+                        onClick={() => setGenerated(false)}
                     >
                         Download{fileDescription ? ` ${fileDescription}` : ''}
                     </button>

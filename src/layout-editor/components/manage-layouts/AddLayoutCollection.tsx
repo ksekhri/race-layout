@@ -25,9 +25,7 @@ export const AddLayoutCollection = ({
                 type="text"
                 placeholder="Layout Collection Name"
                 value={collectionName}
-                onChange={(event) => {
-                    setCollectionName(event.target.value)
-                }}
+                onChange={(event) => setCollectionName(event.target.value)}
             />
             <input
                 type="text"
@@ -45,17 +43,13 @@ export const AddLayoutCollection = ({
                 type="text"
                 placeholder="Layout Name"
                 value={layoutName}
-                onChange={(event) => {
-                    setLayoutName(event.target.value)
-                }}
+                onChange={(event) => setLayoutName(event.target.value)}
             />
             <input
                 type="text"
                 placeholder="Background Image URL"
                 value={background}
-                onChange={(event) => {
-                    setBackground(event.target.value)
-                }}
+                onChange={(event) => setBackground(event.target.value)}
             />
             <div className="mt-4">
                 <button

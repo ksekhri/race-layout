@@ -1,7 +1,7 @@
 import React from 'react'
 import { LayoutItemRadio } from '../../../components/LayoutItemRadio'
 import { AddLayout } from './AddLayout'
-import { EditLayout } from '../EditLayout'
+import { EditLayout } from './EditLayout'
 
 export const LayoutItemEditor = () => {
     const [state, setState] = React.useState<'view' | 'edit' | 'add'>('view')

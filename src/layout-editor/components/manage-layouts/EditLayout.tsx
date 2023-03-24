@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRaceContext } from '../../race-context'
+import { useRaceContext } from '../../../race-context'
 
 export const EditLayout = ({ cancel }: { cancel: () => void }) => {
     const { activeLayout, updateActiveLayout, selectedLayoutCollection } =
@@ -30,17 +30,13 @@ export const EditLayout = ({ cancel }: { cancel: () => void }) => {
                     type="text"
                     placeholder="Name"
                     value={name}
-                    onChange={(event) => {
-                        setName(event.target.value)
-                    }}
+                    onChange={(event) => setName(event.target.value)}
                 />
                 <input
                     type="text"
                     placeholder="Background Image URL"
                     value={background}
-                    onChange={(event) => {
-                        setBackground(event.target.value)
-                    }}
+                    onChange={(event) => setBackground(event.target.value)}
                 />
             </div>
             <input
@@ -50,9 +46,7 @@ export const EditLayout = ({ cancel }: { cancel: () => void }) => {
                 id="highlighted"
                 className="m-2 p-2 rounded-full shadow"
                 checked={highlighted}
-                onChange={(event) => {
-                    setHighlighted(event.target.checked)
-                }}
+                onChange={(event) => setHighlighted(event.target.checked)}
             />
             <label htmlFor="highlighted">Has Highlight</label>
             <div>

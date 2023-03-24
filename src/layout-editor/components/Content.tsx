@@ -1,11 +1,9 @@
 import React from 'react'
-import { Tabs } from './Tabs'
+import { Tabs } from '../../components/Tabs'
 import { ManageLayouts } from './manage-layouts/ManageLayouts'
 import { PositionText } from './position-text/PositionText'
 
 export const Content = () => {
-    const [isAddingCollection, setIsAddingCollection] = React.useState(false)
-    const [isAddingLayout, setIsAddingLayout] = React.useState(false)
     const [activeIndex, setActiveIndex] = React.useState(0)
     return (
         <section className="max-w-screen-xl mx-auto">

@@ -1,7 +1,7 @@
 import React from 'react'
-import { FloatInput } from '../../components/FloatInput'
-import * as Types from '../../types'
-import { Rectangle } from '../ImageMeasure'
+import { FloatInput } from '../../../components/FloatInput'
+import * as Types from '../../../types'
+import { Rectangle } from './ImageMeasure'
 
 export const PositionSetter = ({
     name,

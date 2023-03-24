@@ -15,9 +15,7 @@ export const PrizePoolConfig = () => {
                 name="prize-pool"
                 placeholder="Prize Pool"
                 value={updatePool}
-                onChange={(event) => {
-                    setUpdatePool(event.target.value)
-                }}
+                onChange={(event) => setUpdatePool(event.target.value)}
             />
             <button
                 className="btn"

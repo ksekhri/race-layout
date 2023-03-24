@@ -13,15 +13,12 @@ export const CommentatorsConfig = () => {
                 type="text"
                 name="commentators"
                 placeholder="Commentators"
-                id=""
                 value={updatedCommentators}
                 onChange={(event) => setUpdatedCommentators(event.target.value)}
             />
             <button
                 className="btn"
-                onClick={() => {
-                    setCommentators(updatedCommentators)
-                }}
+                onClick={() => setCommentators(updatedCommentators)}
             >
                 Set Commentators
             </button>

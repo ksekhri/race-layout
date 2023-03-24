@@ -17,9 +17,7 @@ export const LayoutCollectionSelector = () => {
                 name="layout"
                 id="layout"
                 value={selectedLayoutCollectionId}
-                onChange={(event) => {
-                    setLayoutCollectionId(event.target.value)
-                }}
+                onChange={(event) => setLayoutCollectionId(event.target.value)}
             >
                 {map(layoutLibrary, ({ name }, id) => (
                     <option key={id} value={id}>

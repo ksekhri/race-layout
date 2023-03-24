@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import { Card } from '../../../components/Card'
-import { PositionsEditor } from '../PositionsEditor'
+import { PositionsEditor } from './PositionsEditor'
 import { LayoutCollectionSelector } from '../../../components/LayoutCollectionSelector'
 import { LayoutItemRadio } from '../../../components/LayoutItemRadio'
 

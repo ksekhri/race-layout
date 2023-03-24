@@ -1,10 +1,10 @@
 import React from 'react'
-import { useRaceContext } from '../../race-context'
-import * as Types from '../../types'
+import { useRaceContext } from '../../../race-context'
+import * as Types from '../../../types'
 import { PositionSetter } from './PositionSetter'
-import { Card } from '../../components/Card'
-import { ImageMeasure, Rectangle } from '../ImageMeasure'
-import { LayoutWindow } from '../../layout/Layout'
+import { Card } from '../../../components/Card'
+import { ImageMeasure, Rectangle } from './ImageMeasure'
+import { LayoutWindow } from '../../../layout/Layout'
 
 export const PositionsEditor = () => {
     const {
