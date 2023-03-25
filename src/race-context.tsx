@@ -159,7 +159,9 @@ export const RaceContextProvider = ({
     }
 
     const setActiveRacer = (racerId: string, index: number) => {
-        const activeRacers = [...data.activeRacers]
+        const activeRacers = data.activeRacers.map((id) =>
+            id === racerId ? '' : id
+        )
         activeRacers[index] = racerId
         setData({ ...data, activeRacers })
     }

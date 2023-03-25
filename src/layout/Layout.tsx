@@ -9,18 +9,30 @@ import { LayoutContextProvider } from './layout-context'
 import { Places } from './components/Places'
 
 export const LayoutWindow = () => {
+    const [refresh, setRefresh] = React.useState(false)
+    React.useEffect(() => {
+        if (refresh) {
+            setRefresh(false)
+        }
+    }, [refresh])
     const ref = React.useRef(null)
     const containerOffsetSize = useOffsetSize(ref)
 
     return (
         <LayoutContextProvider containerOffsetSize={containerOffsetSize}>
-            <div className="relative w-full h-auto" ref={ref}>
-                <Background />
-                <PrizePool />
-                <Commentators />
-                <Racers />
-                <Places />
-            </div>
+            {!refresh && (
+                <div
+                    className="relative w-full h-auto cursor-pointer"
+                    ref={ref}
+                    onClick={() => setRefresh(true)}
+                >
+                    <Background title="Click to refresh layout" />
+                    <PrizePool />
+                    <Commentators />
+                    <Racers />
+                    <Places />
+                </div>
+            )}
         </LayoutContextProvider>
     )
 }
