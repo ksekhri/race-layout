@@ -3,7 +3,7 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
 
 export const Header = ({ page }: { page: 'dashboard' | 'layout-editor' }) => (
     <header className="text-xl select-none bg-slate-50 shadow-md font-medium">
-        <div className="flex justify-between h-24 items-center max-w-screen-xl mx-auto">
+        <div className="flex justify-between h-24 items-center max-w-screen-2xl mx-auto">
             <a className="text-3xl font-semibold" href="/">
                 <div>👟 RaceLayout</div>
             </a>

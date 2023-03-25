@@ -17,7 +17,7 @@ export const CommentatorsConfig = () => {
                 onChange={(event) => setUpdatedCommentators(event.target.value)}
             />
             <button
-                className="btn"
+                className="btn ml-2"
                 onClick={() => setCommentators(updatedCommentators)}
             >
                 Set Commentators

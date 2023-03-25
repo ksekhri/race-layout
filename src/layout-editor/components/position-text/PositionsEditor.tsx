@@ -16,7 +16,15 @@ export const PositionsEditor = () => {
     } = useRaceContext()
     const [positionNumber, setPositionNumber] = React.useState('')
 
-    const { prizePool, commentators, places, racers, highlight, highlightPb } =
+    const {
+        prizePool,
+        commentators,
+        timeLeft,
+        places,
+        racers,
+        highlight,
+        highlightPb,
+    } =
         layoutLibrary[selectedLayoutCollectionId].layouts[activeLayoutId]
             .positions
     const [rect, setRect] = React.useState<Rectangle | null>(null)
@@ -38,6 +46,15 @@ export const PositionsEditor = () => {
                 updatePosition({
                     position,
                     positionKey: 'commentators',
+                }),
+        },
+        {
+            name: 'Time Left',
+            value: timeLeft,
+            setter: (position: Types.TextLayout) =>
+                updatePosition({
+                    position,
+                    positionKey: 'timeLeft',
                 }),
         },
         ...places.map((place, index) => ({

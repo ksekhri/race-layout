@@ -2,6 +2,8 @@ export type State = {
     localVersion: string
     prizePool: number
     commentators: string
+    startEpoch: number
+    raceLength: number
     layoutLibrary: LayoutLibrary
     selectedLayoutCollectionId: string
     selectedLayoutCollection: LayoutCollection
@@ -38,6 +40,7 @@ export type Layout = {
 export type Positions = {
     prizePool: TextLayout
     commentators: TextLayout
+    timeLeft: TextLayout
     places: TextLayout[]
     racers: TextLayout[]
     highlight: TextLayout[]

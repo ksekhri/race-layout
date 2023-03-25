@@ -1,6 +1,6 @@
 import * as Types from './types'
 
-export const WEB_VERSION = '0.0.4'
+export const WEB_VERSION = '0.0.5'
 
 export const DEFAULT_TEXT_LAYOUT: Types.TextLayout = {
     left: 20,
@@ -20,6 +20,8 @@ export const DEFAULT_STATE: Omit<
     localVersion: WEB_VERSION,
     prizePool: 0,
     commentators: '',
+    startEpoch: 0,
+    raceLength: 60 * 1000 * 60,
     selectedLayoutCollectionId: '',
     activeLayoutId: '',
     activeRacers: ['', '', '', '', '', '', '', '', '', ''],
@@ -53,6 +55,16 @@ export const DEFAULT_STATE: Omit<
                             top: 21.728395061728396,
                             height: 14.320987654320987,
                             width: 30.416666666666664,
+                        },
+                        timeLeft: {
+                            color: '#ffffff',
+                            fontSize: 30,
+                            textAlign: 'center',
+                            left: 37.7,
+                            top: 85.4320987654321,
+                            height: 11.851851851851853,
+                            width: 25,
+                            flag: false,
                         },
                         places: [
                             {
@@ -161,6 +173,16 @@ export const DEFAULT_STATE: Omit<
                             top: 4.691358024691358,
                             height: 19.753086419753085,
                             width: 26.111111111111114,
+                        },
+                        timeLeft: {
+                            color: '#ffffff',
+                            fontSize: 30,
+                            textAlign: 'center',
+                            left: 72.36111111111111,
+                            top: 87.1604938271605,
+                            height: 10.123456790123457,
+                            width: 26.111111111111114,
+                            flag: false,
                         },
                         places: [
                             {
@@ -293,6 +315,16 @@ export const DEFAULT_STATE: Omit<
                             height: 14.320987654320987,
                             width: 30.416666666666664,
                         },
+                        timeLeft: {
+                            color: '#ffffff',
+                            fontSize: 30,
+                            textAlign: 'center',
+                            left: 37.5,
+                            top: 85.67901234567901,
+                            height: 11.358024691358025,
+                            width: 25.13888888888889,
+                            flag: false,
+                        },
                         places: [
                             {
                                 color: '#ffffff',
@@ -400,6 +432,16 @@ export const DEFAULT_STATE: Omit<
                             top: 29.38271604938272,
                             height: 18.02469135802469,
                             width: 19.86111111111111,
+                        },
+                        timeLeft: {
+                            color: '#ffffff',
+                            fontSize: 30,
+                            textAlign: 'center',
+                            left: 79.58333333333333,
+                            top: 54.074074074074076,
+                            height: 8.148148148148149,
+                            width: 19.5,
+                            flag: false,
                         },
                         places: [
                             {
@@ -521,6 +563,16 @@ export const DEFAULT_STATE: Omit<
                             height: 10.123456790123457,
                             width: 29.1,
                         },
+                        timeLeft: {
+                            color: '#ffffff',
+                            fontSize: 30,
+                            textAlign: 'center',
+                            left: 35.55555555555556,
+                            top: 38.51851851851852,
+                            height: 10.617283950617285,
+                            width: 14.722222222222223,
+                            flag: false,
+                        },
                         places: [
                             {
                                 color: '#ffffff',
@@ -637,6 +689,16 @@ export const DEFAULT_STATE: Omit<
                             top: 79.75308641975309,
                             height: 19.012345679012345,
                             width: 25.555555555555554,
+                        },
+                        timeLeft: {
+                            color: '#ffffff',
+                            fontSize: 30,
+                            textAlign: 'center',
+                            left: 1.3888888888888888,
+                            top: 84.93827160493828,
+                            height: 13.82716049382716,
+                            width: 20.833333333333336,
+                            flag: false,
                         },
                         places: [
                             {

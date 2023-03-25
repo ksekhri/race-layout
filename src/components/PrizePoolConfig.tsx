@@ -18,7 +18,7 @@ export const PrizePoolConfig = () => {
                 onChange={(event) => setUpdatePool(event.target.value)}
             />
             <button
-                className="btn"
+                className="btn ml-2"
                 disabled={isNaN(Number(updatePool))}
                 onClick={() => {
                     setPrizePool(Number(updatePool))
@@ -37,7 +37,7 @@ export const PrizePoolConfig = () => {
                 }}
             />
             <button
-                className="btn"
+                className="btn ml-2"
                 disabled={isNaN(Number(additionToPool))}
                 onClick={() => {
                     setPrizePool(prizePool + Number(additionToPool))

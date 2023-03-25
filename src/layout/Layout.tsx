@@ -7,6 +7,7 @@ import { Racers } from './components/Racers'
 import { useOffsetSize } from '../hooks'
 import { LayoutContextProvider } from './layout-context'
 import { Places } from './components/Places'
+import { TimeLeft } from './components/TimeLeft'
 
 export const LayoutWindow = () => {
     const [refresh, setRefresh] = React.useState(false)
@@ -31,6 +32,7 @@ export const LayoutWindow = () => {
                     <Commentators />
                     <Racers />
                     <Places />
+                    <TimeLeft />
                 </div>
             )}
         </LayoutContextProvider>

@@ -10,7 +10,7 @@ import { LayoutWindow } from '../../../layout/Layout'
 export const ManageLayouts = ({ className }: { className?: string }) => {
     const [isAddingCollection, setIsAddingCollection] = React.useState(false)
     return (
-        <section className={cn('max-w-screen-xl mx-auto', className)}>
+        <section className={cn('max-w-screen-2xl mx-auto', className)}>
             <div className="mt-3 -mx-2">
                 {!isAddingCollection && (
                     <>

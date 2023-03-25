@@ -10,6 +10,8 @@ type Updater = {
     setLayoutLibrary: (layoutLibrary: Types.State['layoutLibrary']) => void
     setPrizePool: (prizePool: Types.State['prizePool']) => void
     setCommentators: (commentators: Types.State['commentators']) => void
+    setStartEpoch: (startEpoch: Types.State['startEpoch']) => void
+    setRaceLength: (raceLength: Types.State['raceLength']) => void
     setLayoutCollectionId: (
         selectedLayoutCollectionId: Types.State['selectedLayoutCollectionId']
     ) => void
@@ -33,7 +35,7 @@ type Updater = {
         } & (
             | {
                   position: Types.TextLayout
-                  positionKey: 'prizePool' | 'commentators'
+                  positionKey: 'prizePool' | 'commentators' | 'timeLeft'
               }
             | {
                   position: Types.TextLayout[]
@@ -92,6 +94,7 @@ export const RaceContextProvider = ({
                   ...DEFAULT_STATE,
                   ...JSON.parse(savedData),
                   layoutLibrary: DEFAULT_STATE.layoutLibrary,
+                  raceLength: 60 * 1000 * 60,
                   localVersion: WEB_VERSION,
               }
             : DEFAULT_STATE
@@ -124,6 +127,14 @@ export const RaceContextProvider = ({
 
     const setCommentators = (commentators: Types.State['commentators']) => {
         setData({ ...data, commentators })
+    }
+
+    const setStartEpoch = (startEpoch: Types.State['startEpoch']) => {
+        setData({ ...data, startEpoch })
+    }
+
+    const setRaceLength = (raceLength: Types.State['raceLength']) => {
+        setData({ ...data, raceLength })
     }
 
     const setLayoutCollectionId = (
@@ -375,9 +386,6 @@ export const RaceContextProvider = ({
         setData({ ...data, places: updatedPlaces })
     }
 
-    data.layoutLibrary['4 Person Race (Classic)'].layouts['All Racers'] = {
-        ...data.layoutLibrary['4 Person Race'].layouts['All Racers'],
-    }
     return (
         <RaceContextState.Provider
             value={{
@@ -396,6 +404,8 @@ export const RaceContextProvider = ({
                     setLayoutLibrary,
                     setPrizePool,
                     setCommentators,
+                    setStartEpoch,
+                    setRaceLength,
                     setLayoutCollectionId,
                     setActiveLayoutId,
                     setActiveRacer,

@@ -6,7 +6,7 @@ import { PositionText } from './position-text/PositionText'
 export const Content = () => {
     const [activeIndex, setActiveIndex] = React.useState(0)
     return (
-        <section className="max-w-screen-xl mx-auto">
+        <section className="max-w-screen-2xl mx-auto">
             <div className="mt-3">
                 <Tabs
                     handleUpdate={setActiveIndex}
