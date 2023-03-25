@@ -1,12 +1,12 @@
 import React from 'react'
 import { useRaceContext } from '../race-context'
 import { AddNewRacer } from './AddNewRacer'
-import { ActiveRacer } from './ActiveRacer'
 import { RemoveRacer } from './RemoveRacer'
 import { Tabs } from './Tabs'
 import { UpdateRacers } from './UpdateRacers'
 
 export const RacerConfig = () => {
+    const { racers } = useRaceContext()
     const [activeIndex, setActiveIndex] = React.useState(0)
 
     return (
@@ -18,7 +18,16 @@ export const RacerConfig = () => {
                 handleUpdate={setActiveIndex}
                 className="mb-6"
             />
-            {activeIndex === 0 && <UpdateRacers />}
+            {activeIndex === 0 && (
+                <>
+                    <UpdateRacers />
+                    {Object.keys(racers).length === 0 && (
+                        <div className="mt-6">
+                            Add racers by clicking the "Edit Racers" tab above
+                        </div>
+                    )}
+                </>
+            )}
             {activeIndex === 1 && (
                 <>
                     <AddNewRacer />
