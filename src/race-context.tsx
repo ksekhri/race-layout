@@ -2,9 +2,8 @@ import * as React from 'react'
 import map from 'lodash/map'
 import * as Types from './types'
 import { DEFAULT_TEXT_LAYOUT } from './constants'
-import { DEFAULT_STATE } from './constants'
+import { DEFAULT_STATE, WEB_VERSION } from './constants'
 
-const WEB_VERSION = '0.0.3'
 const LOCAL_STORAGE_DATA_KEY = 'raceLayout'
 
 type Updater = {

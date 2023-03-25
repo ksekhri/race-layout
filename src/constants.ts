@@ -1,5 +1,7 @@
 import * as Types from './types'
 
+export const WEB_VERSION = '0.0.4'
+
 export const DEFAULT_TEXT_LAYOUT: Types.TextLayout = {
     left: 20,
     top: 20,
@@ -15,7 +17,7 @@ export const DEFAULT_STATE: Omit<
     Types.State,
     'selectedLayoutCollection' | 'getRacer' | 'getLayout' | 'activeLayout'
 > = {
-    localVersion: '0.0.3',
+    localVersion: WEB_VERSION,
     prizePool: 0,
     commentators: '',
     selectedLayoutCollectionId: '',

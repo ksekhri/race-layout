@@ -1,6 +1,6 @@
 {
   "name": "race-layout",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Layout for a race to be captured by OBS",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
