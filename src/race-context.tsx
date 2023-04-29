@@ -93,8 +93,8 @@ export const RaceContextProvider = ({
             ? {
                   ...DEFAULT_STATE,
                   ...JSON.parse(savedData),
-                  layoutLibrary: DEFAULT_STATE.layoutLibrary,
-                  raceLength: 60 * 1000 * 60,
+                  //   layoutLibrary: DEFAULT_STATE.layoutLibrary,
+                  //   raceLength: 60 * 1000 * 60,
                   localVersion: WEB_VERSION,
               }
             : DEFAULT_STATE

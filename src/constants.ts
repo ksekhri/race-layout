@@ -1,6 +1,6 @@
 import * as Types from './types'
 
-export const WEB_VERSION = '0.0.5'
+export const WEB_VERSION = '0.0.6'
 
 export const DEFAULT_TEXT_LAYOUT: Types.TextLayout = {
     left: 20,
